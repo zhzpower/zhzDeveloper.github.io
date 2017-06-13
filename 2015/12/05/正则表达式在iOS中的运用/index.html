@@ -1,0 +1,330 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>正则表达式在iOS中的运用 | zhz blogs</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/6.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.2/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.2/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">正则表达式在iOS中的运用</h1><a id="logo" href="/.">zhz blogs</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">正则表达式在iOS中的运用</h1><div class="post-meta">Dec 5, 2015<span> | </span><span class="category"><a href="/categories/正则/">正则</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span></div><div class="post-content"><h1 id="一、什么是正则表达式"><a href="#一、什么是正则表达式" class="headerlink" title="一、什么是正则表达式"></a>一、什么是正则表达式</h1><hr>
+<p> 　　正则表达式，又称正规表示法，是对字符串操作的一种逻辑公式。正则表达式可以检测给定的字符串是否符合我们定义的逻辑，也可以从字符串中获取我们想要的特定部分。它可以迅速地用极简单的方式达到字符串的复杂控制。</p>
+<h1 id="二、正则表达式的语法"><a href="#二、正则表达式的语法" class="headerlink" title="二、正则表达式的语法"></a>二、正则表达式的语法</h1><hr>
+<p> 　　看一个过滤纯数字的例子<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">-  (BOOL)validateNumber:(NSString *) textString</div><div class="line">&#123;</div><div class="line">    NSString* number=@&quot;^[0-9]+$&quot;;</div><div class="line">    NSPredicate *numberPre = [NSPredicate predicateWithFormat:@&quot;SELF MATCHES %@&quot;,number];</div><div class="line">    return [numberPre evaluateWithObject:textString];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p> 　　其中下述语句就是一个正则表达式</p>
+<p> <code>@&quot;^[0-9]+$&quot;</code><br> 　　它代表了<code>字符串中只能包含&gt;=1个0-9的数字</code>，语法是不是有一些怪异？</p>
+<p> 　　下面我们先撇开iOS中的正则表达式的语法，用通俗的正则表达式语法来为介绍一下。（iOS语法与通俗的正则表达式语法相同，不同在于对转义字符的处理上(语言类的都相同)）</p>
+<p> 　　语法：</p>
+<p> 　　首先，特殊符号<code>^</code>和<code>$</code>。他们的作用是分别指出一个<code>字符串的开始和结束</code>。eg：</p>
+<p> 　　<code>^one</code>：表示所有以<code>one</code>开始的字符串（<code>one cat</code>，<code>one123</code>，·····）；</p>
+<p> 　　类似于:- (BOOL)hasPrefix:(NSString *)aString;</p>
+<p> 　　<code>a dog$</code>：表示所以以<code>a dog</code>结尾的字符串（<code>it is a dog</code>，·····）；</p>
+<p> 　　类似于:- (BOOL)hasSuffix:(NSString *)aString;</p>
+<p> 　　<code>^apple$</code>：表示开始和结尾都是<code>apple</code>的字符串，这个是唯一的~；</p>
+<p> 　　<code>banana</code>：表示任何包含<code>banana</code>的字符串。</p>
+<p> 　　类似于 iOS8的新方法- (BOOL)containsString:(NSString *)aString,搜索子串用的。</p>
+<p> 　　<code>*</code>，<code>+</code>和<code>?</code>这三个符号，表示一个或N个字符重复出现的次数。它们分别表示<code>没有或更多</code>（[0,+∞]取整），<code>一次或更多</code>（[1,+∞]取整），<code>没有或一次</code>（[0,1]取整）。下面是几个例子：</p>
+<p> 　　<code>ab*</code>：表示一个字符串有一个a后面跟着零个或若干个b（<code>a</code>, <code>ab</code>, <code>abbb</code>,……）；</p>
+<p> 　　<code>ab+</code>：表示一个字符串有一个a后面跟着至少一个b或者更多（ <code>ab</code>, <code>abbb</code>,……）；</p>
+<p> 　　<code>ab?</code>：表示一个字符串有一个a后面跟着零个或者一个b（ <code>a</code>, <code>ab</code>）；</p>
+<p> 　　<code>a?b+$</code>：表示在字符串的末尾有零个或一个a跟着一个或几个b（ <code>b</code>, <code>ab</code>,<code>bb</code>,<code>abb</code>,……）。</p>
+<p> 　　可以用大括号括起来（{}），表示一个重复的具体范围。例如</p>
+<p> 　　<code>ab{4}</code>：表示一个字符串有一个a跟着4个b（<code>abbbb</code>）；</p>
+<p> 　　<code>ab{1,}</code>：表示一个字符串有一个a跟着至少1个b（<code>ab</code>,<code>abb</code>,<code>abbb</code>,……)；</p>
+<p> 　　<code>ab{3,4}</code>：表示一个字符串有一个a跟着3到4个b（<code>abbb</code>,<code>abbbb</code>)。</p>
+<p> 　　那么，<code>*</code>可以用{0，}表示，<code>+</code>可以用{1，}表示，<code>?</code>可以用{0，1}表示</p>
+<p> 　　注意：可以没有下限，但是不能没有上限！例如<code>ab{,5}</code>是错误的写法</p>
+<p> 　　<code>|</code>表示<code>或</code>操作：</p>
+<p> 　　<code>a|b</code>：表示一个字符串里有<code>a</code>或者<code>b</code>；</p>
+<p> 　　<code>(a|bcd)ef</code>：表示<code>aef</code>或<code>bcdef</code>；</p>
+<p> 　　<code>(a|b)*c</code>：表示一串<code>a</code>“b<code>混合的字符串后面跟一个</code>c`；</p>
+<p> 　　方括号<code>[ ]</code>表示在括号内的众多字符中，选择1-N个括号内的符合语法的字符作为结果，例如</p>
+<p> 　　<code>[ab]</code>：表示一个字符串有一个<code>a</code>或<code>b</code>（相当于<code>a|b</code>）；</p>
+<p> 　　<code>[a-d]</code>：表示一个字符串包含小写的’a’到’d’中的一个（相当于<code>a|b|c|d</code>或者<code>[abcd]</code>）；</p>
+<p> 　　<code>^[a-zA-Z]</code>：表示一个以字母开头的字符串；</p>
+<p> 　　<code>[0-9]a</code>：表示a前有一位的数字；</p>
+<p> 　　<code>[a-zA-Z0-9]$</code>：表示一个字符串以一个字母或数字结束。</p>
+<p> 　　<code>.</code>匹配除<code>\r\n</code>之外的任何单个字符：</p>
+<p> 　　<code>a.[a-z]</code>：表示一个字符串有一个<code>a</code>后面跟着一个任意字符和一个小写字母；</p>
+<p> 　　<code>^.{5}$</code>：表示任意1个长度为5的字符串；</p>
+<p> 　　<code>\num</code> 其中num是一个正整数。表示<code>\num</code>之前的字符出现相同的个数，例如</p>
+<p> 　　`(.)\1″：表示两个连续的相同字符。</p>
+<p> 　　<code>10\{1,2\}</code> : 表示数字1后面跟着1或者2个0 (<code>10″,</code>100″)。</p>
+<p> 　　<code>0\{3,\}</code> 表示数字为至少3个连续的0 （<code>000</code>，<code>0000</code>，······）。</p>
+<p> 　　在方括号里用’^’表示不希望出现的字符，’^’应在方括号里的第一位。</p>
+<p> 　　<code>@[^a-zA-Z]4@</code>表示两个<code>@</code>中不应该出现字母）。</p>
+<p> 　　常用的还有：</p>
+<p> 　　<code>\d</code>匹配一个数字字符。等价于[0-9]。</p>
+<p> 　　<code>\D</code>匹配一个非数字字符。等价于[^0-9]。</p>
+<p> 　　<code>\w</code>匹配包括下划线的任何单词字符。等价于<code>[A-Za-z0-9_]</code>。</p>
+<p> 　　<code>\W</code>匹配任何非单词字符。等价于<code>[^A-Za-z0-9_]</code>。</p>
+<p> 　　iOS中书写正则表达式，碰到转义字符，多加一个<code>\</code>,例如：</p>
+<p> 　　全数字字符：@<code>^\\d\+$</code></p>
+<h1 id="三、iOS中正则表达式"><a href="#三、iOS中正则表达式" class="headerlink" title="三、iOS中正则表达式"></a>三、iOS中正则表达式</h1><hr>
+<h2 id="1-正则表达式与NSPredicate连用，eg："><a href="#1-正则表达式与NSPredicate连用，eg：" class="headerlink" title="1.正则表达式与NSPredicate连用，eg："></a>1.正则表达式与NSPredicate连用，eg：</h2> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">- (BOOL)validateNumber:(NSString *) textString</div><div class="line">&#123;</div><div class="line">    NSString* number=@&quot;^[0-9]+$&quot;;</div><div class="line">    NSPredicate *numberPre = [NSPredicate predicateWithFormat:@&quot;SELF MATCHES %@&quot;,number];</div><div class="line">    return [numberPre evaluateWithObject:textString];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="2-NSString方法"><a href="#2-NSString方法" class="headerlink" title="2.NSString方法"></a>2.NSString方法</h2> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">　　- (NSRange)rangeOfString:(NSString *)aString options:(NSStringCompareOptions)mask;</div><div class="line"></div><div class="line">NSString *searchText = @&quot;rangeOfString&quot;;</div><div class="line">NSRange range = [searchText rangeOfString:@&quot;^[0-9]+$&quot; options:NSRegularExpressionSearch];</div><div class="line">if (range.location != NSNotFound) &#123;</div><div class="line">   NSLog(@&quot;range ：%@&quot;, [searchText substringWithRange:range]);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="3-正则表达式类（NSRegularExpression）"><a href="#3-正则表达式类（NSRegularExpression）" class="headerlink" title="3.正则表达式类（NSRegularExpression）"></a>3.正则表达式类（NSRegularExpression）</h2> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">NSString *searchText = @&quot;you want to match&quot;;    </div><div class="line">NSError *error = NULL;</div><div class="line">NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@&quot;^[0-9]+$&quot; options:NSRegularExpressionCaseInsensitive error:&amp;error];</div><div class="line">NSTextCheckingResult *result = [regex firstMatchInString:searchText options:0 range:NSMakeRange(0, [searchText length])];</div><div class="line">if (result) &#123;</div><div class="line">   NSLog(@&quot;%@&quot;, [searchText substringWithRange:result.range]);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="四、常用的正则表达式"><a href="#四、常用的正则表达式" class="headerlink" title="四、常用的正则表达式"></a>四、常用的正则表达式</h1><hr>
+<p> 　　以下红色字符串是常用的正则表达式（以下正则表达式来自百度百科）</p>
+<p> 　　1.验证用户名和密码：<code>^[a-zA-Z]\w{5,15}$</code></p>
+<p> 　　2.验证电话号码：（<code>^(\\d{3,4}-)\\d{7,8}$</code>）</p>
+<p> 　　eg：021-68686868 0511-6868686；</p>
+<p> 　　3.验证手机号码：<code>^1[3|4|5|7|8][0-9]\\d{8}$</code>；</p>
+<p> 　　4.验证身份证号（15位或18位数字）：<code>\\d{14}[[0-9],0-9xX]</code>；</p>
+<p> 　　5.验证Email地址：(<code>^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\.\\w+([-.]\\w+)*$</code>)；</p>
+<p> 　　6.只能输入由数字和26个英文字母组成的字符串：(<code>^[A-Za-z0-9]+$</code>) ;</p>
+<p> 　　7.整数或者小数：^[0-9]+([.]{0,1}[0-9]+){0,1}$</p>
+<p> 　　8.只能输入数字：<code>^[0-9]*$</code>。</p>
+<p> 　　9.只能输入n位的数字：<code>^\\d{n}$</code>。</p>
+<p> 　　10.只能输入至少n位的数字：<code>^\\d{n,}$</code>。</p>
+<p> 　　11.只能输入m~n位的数字：<code>^\\d{m,n}$</code>。</p>
+<p> 　　12.只能输入零和非零开头的数字：<code>^(0|[1-9][0-9]*)$</code>。</p>
+<p> 　　13.只能输入有两位小数的正实数：<code>^[0-9]+(.[0-9]{2})?$</code>。</p>
+<p> 　　14.只能输入有1~3位小数的正实数：<code>^[0-9]+(\.[0-9]{1,3})?$</code>。</p>
+<p> 　　15.只能输入非零的正整数：<code>^\+?[1-9][0-9]*$</code>。</p>
+<p> 　　16.只能输入非零的负整数：`^-[1-9][]0-9″*$。</p>
+<p> 　　17.只能输入长度为3的字符：<code>^.{3}$</code>。</p>
+<p> 　　18.只能输入由26个英文字母组成的字符串：<code>^[A-Za-z]+$</code>。</p>
+<p> 　　19.只能输入由26个大写英文字母组成的字符串：<code>^[A-Z]+$</code>。</p>
+<p> 　　20.只能输入由26个小写英文字母组成的字符串：<code>^[a-z]+$</code>。</p>
+<p> 　　21.验证是否含有^%&amp;’,;=?$`等字符：<code>[^%&amp;&#39;,;=?$\x22]+</code>。</p>
+<p> 　　22.只能输入汉字：<code>^[\u4e00-\u9fa5]{0,}$</code>。</p>
+<p> 　　23.验证URL：<code>^http://([\\w-]+\.)+[\\w-]+(/[\\w-./?%&amp;=]*)?$</code>。</p>
+<p> 　　24.验证一年的12个月：<code>^(0?[1-9]|1[0-2])$</code>正确格式为：<code>01″～</code>09″和<code>10″～</code>12″。</p>
+<p> 　　25.验证一个月的31天：<code>^((0?[1-9])|((1|2)[0-9])|30|31)$</code>正确格式为；<code>01″～</code>09″、<code>10″～</code>29″和<code>30</code>~<code>31</code>。</p>
+<p> 　　26.获取日期正则表达式：\d{4}[年|-|.]\d{\1-\12}[月|-|.]\d{\1-\31}日?</p>
+<p> 　　评注：可用来匹配大多数年月日信息。</p>
+<p> 　　27.匹配双字节字符(包括汉字在内)：[^\x00-\xff]</p>
+<p> 　　评注：可以用来计算字符串的长度（一个双字节字符长度计2，ASCII字符计1）</p>
+<p> 　　28.匹配空白行的正则表达式：\n\s*\r</p>
+<p> 　　评注：可以用来删除空白行</p>
+<p> 　　29.匹配HTML标记的正则表达式：<code>&lt;(\S*?)[^&gt;]*&gt;.*?&lt;/&gt;|&lt;.*? /&gt;</code></p>
+<p> 　　评注：网上流传的版本太糟糕，上面这个也仅仅能匹配部分，对于复杂的嵌套标记依旧无能为力</p>
+<p> 　　30.匹配首尾空白字符的正则表达式：<code>^\s*|\s*$</code></p>
+<p> 　　评注：可以用来删除行首行尾的空白字符(包括空格、制表符、换页符等等)，非常有用的表达式</p>
+<p> 　　31.匹配网址URL的正则表达式：<code>[a-zA-z]+://[^\s]*</code></p>
+<p> 　　评注：网上流传的版本功能很有限，上面这个基本可以满足需求</p>
+<p> 　　32.匹配帐号是否合法(字母开头，允许5-16字节，允许字母数字下划线)：<code>^[a-zA-Z][a-zA-Z0-9_]{4,15}$</code></p>
+<p> 　　评注：表单验证时很实用</p>
+<p> 　　33.匹配腾讯QQ号：<code>[1-9][0-9]\{4,\}</code></p>
+<p> 　　评注：腾讯QQ号从10 000 开始</p>
+<p> 　　34.匹配中国邮政编码：<code>[1-9]\\d{5}(?!\d)</code></p>
+<p> 　　评注：中国邮政编码为6位数字</p>
+<p> 　　35.匹配ip地址：<code>((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)</code>。</p>
+<p> 　　下面给出正则表达式的元字符（来自百度百科）</p>
+<h1 id="五、正则表达式中的元字符"><a href="#五、正则表达式中的元字符" class="headerlink" title="　五、正则表达式中的元字符"></a>　五、正则表达式中的元字符</h1><hr>
+<table>
+<thead>
+<tr>
+<th>元字符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> <code>\</code></td>
+<td>将下一个字符标记为一个特殊字符、或一个原义字符、或一个向后引用、或一个八进制转义符。例如，<code>\\n</code>匹配\n。<code>\n</code>匹配换行符。序列<code>\\</code>匹配<code>\</code>而<code>\(</code>则匹配<code>(</code>。</td>
+</tr>
+<tr>
+<td> <code>^</code></td>
+<td>匹配输入字符串的开始位置。如果设置了RegExp对象的Multiline属性，^也匹配<code>\n</code>或<code>\r</code>之后的位置。</td>
+</tr>
+<tr>
+<td> <code>$</code></td>
+<td>匹配输入字符串的结束位置。如果设置了RegExp对象的Multiline属性，$也匹配<code>\n</code>或<code>\r</code>之前的位置。</td>
+</tr>
+<tr>
+<td> <code>*</code></td>
+<td>匹配前面的子表达式零次或多次(大于等于0次)。例如，zo<em>能匹配<code>z</code>，<code>zo</code>以及<code>zoo</code>。</em>等价于{0,}。</td>
+</tr>
+<tr>
+<td> <code>+</code></td>
+<td>匹配前面的子表达式一次或多次(大于等于1次）。例如，<code>zo+</code>能匹配<code>zo</code>以及<code>zoo</code>，但不能匹配<code>z</code>。+等价于{1,}。</td>
+</tr>
+<tr>
+<td> <code>?</code></td>
+<td>匹配前面的子表达式零次或一次。例如，<code>do(es)?</code>可以匹配<code>do</code>或<code>does</code>中的<code>do</code>。?等价于{0,1}。</td>
+</tr>
+<tr>
+<td> <code>{n}</code></td>
+<td>n是一个非负整数。匹配确定的n次。例如，<code>o{2}</code>不能匹配<code>Bob</code>中的<code>o</code>，但是能匹配<code>food</code>中的两个o。</td>
+</tr>
+<tr>
+<td> <code>{n,}</code></td>
+<td>n是一个非负整数。至少匹配n次。例如，<code>o{2,}</code>不能匹配<code>Bob</code>中的<code>o</code>，但能匹配<code>foooood</code>中的所有o。<code>o{1,}</code>等价于<code>o+</code>。<code>o{0,}</code>则等价于<code>o*</code>。</td>
+</tr>
+<tr>
+<td> <code>{n,m}</code></td>
+<td>m和n均为非负整数，其中n&lt;=m。最少匹配n次且最多匹配m次。例如，<code>o{1,3}</code>将匹配<code>fooooood</code>中的前三个o。<code>o{0,1}</code>等价于<code>o?</code>。请注意在逗号和两个数之间不能有空格。</td>
+</tr>
+<tr>
+<td> <code>?</code></td>
+<td>当该字符紧跟在任何一个其他限制符（*,+,?，{n}，{n,}，{n,m}）后面时，匹配模式是非贪婪的。非贪婪模式尽可能少的匹配所搜索的字符串，而默认的贪婪模式则尽可能多的匹配所搜索的字符串。例如，对于字符串<code>oooo</code>，<code>o+?</code>将匹配单个<code>o</code>，而<code>o+</code>将匹配所有<code>o</code>。</td>
+</tr>
+<tr>
+<td> <code>.点</code></td>
+<td>匹配除<code>\r\n</code>之外的任何单个字符。要匹配包括<code>\r\n</code>在内的任何字符，请使用像<code>[\s\S]</code>的模式。</td>
+</tr>
+<tr>
+<td> <code>(pattern)</code></td>
+<td>匹配pattern并获取这一匹配。所获取的匹配可以从产生的Matches集合得到，在VBScript中使用SubMatches集合，在JScript中则使用<code>$0…$9</code>属性。要匹配圆括号字符，请使用<code>\(</code>或<code>\)</code>。</td>
+</tr>
+<tr>
+<td> <code>(?:pattern)</code></td>
+<td>匹配pattern但不获取匹配结果，也就是说这是一个非获取匹配，不进行存储供以后使用。这在使用或字符`(</td>
+<td>)<code>来组合一个模式的各个部分是很有用。例如</code>industr(?:y</td>
+<td>ies)<code>就是一个比</code>industry</td>
+<td>industries`更简略的表达式。</td>
+</tr>
+<tr>
+<td> <code>(?=pattern)</code></td>
+<td>正向肯定预查，在任何匹配pattern的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。例如，`Windows(?=95\</td>
+<td>98\</td>
+<td>NT\</td>
+<td>2000)<code>能匹配</code>Windows2000<code>中的</code>Windows<code>，但不能匹配</code>Windows3.1<code>中的</code>Windows`。预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始。</td>
+</tr>
+<tr>
+<td> <code>(?!pattern)</code></td>
+<td>正向否定预查，在任何不匹配pattern的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。例如`Windows(?!95\</td>
+<td>98\</td>
+<td>NT\</td>
+<td>2000)<code>能匹配</code>Windows3.1<code>中的</code>Windows<code>，但不能匹配</code>Windows2000<code>中的</code>Windows`。</td>
+</tr>
+<tr>
+<td> <code>(?&lt;=pattern)</code></td>
+<td>反向肯定预查，与正向肯定预查类似，只是方向相反。例如，`(?\&lt;=95\</td>
+<td>98\</td>
+<td>NT\</td>
+<td>2000)Windows<code>能匹配</code>2000Windows<code>中的</code>Windows<code>，但不能匹配</code>3.1Windows<code>中的</code>Windows`。</td>
+</tr>
+<tr>
+<td> <code>(?&lt;!pattern)</code></td>
+<td>反向否定预查，与正向否定预查类似，只是方向相反。例如`(?\&lt;!95\</td>
+<td>98\</td>
+<td>NT\</td>
+<td>2000)Windows<code>能匹配</code>3.1Windows<code>中的</code>Windows<code>，但不能匹配</code>2000Windows<code>中的</code>Windows`。</td>
+</tr>
+<tr>
+<td> `x\</td>
+<td>y`</td>
+<td>匹配x或y。例如，`z\</td>
+<td>food<code>能匹配</code>z<code>或</code>food<code>。</code>(z\</td>
+<td>f)ood<code>则匹配</code>zood<code>或</code>food`。</td>
+</tr>
+<tr>
+<td> <code>[xyz]</code></td>
+<td>字符集合。匹配所包含的任意一个字符。例如，<code>[abc]</code>可以匹配<code>plain</code>中的<code>a</code>。</td>
+</tr>
+<tr>
+<td> <code>[^xyz]</code></td>
+<td>负值字符集合。匹配未包含的任意字符。例如，<code>[^abc]</code>可以匹配<code>plain</code>中的<code>plin</code>。</td>
+</tr>
+<tr>
+<td> <code>[a-z]</code></td>
+<td>字符范围。匹配指定范围内的任意字符。例如，<code>[a-z]</code>可以匹配<code>a</code>到<code>z</code>范围内的任意小写字母字符。注意:只有连字符在字符组内部时,并且出现在两个字符之间时,才能表示字符的范围; 如果出字符组的开头,则只能表示连字符本身.</td>
+</tr>
+<tr>
+<td> <code>[^a-z]</code></td>
+<td>负值字符范围。匹配任何不在指定范围内的任意字符。例如，<code>[^a-z]</code>可以匹配任何不在<code>a</code>到<code>z</code>范围内的任意字符。</td>
+</tr>
+<tr>
+<td> <code>\b</code></td>
+<td>匹配一个单词边界，也就是指单词和空格间的位置。例如，<code>er\b</code>可以匹配<code>never</code>中的<code>er</code>，但不能匹配<code>verb</code>中的<code>er</code>。</td>
+</tr>
+<tr>
+<td> <code>\B</code></td>
+<td>匹配非单词边界。<code>er\B</code>能匹配<code>verb</code>中的<code>er</code>，但不能匹配<code>never</code>中的<code>er</code>。</td>
+</tr>
+<tr>
+<td> <code>\cx</code></td>
+<td>匹配由x指明的控制字符。例如，\cM匹配一个Control-M或回车符。x的值必须为A-Z或a-z之一。否则，将c视为一个原义的<code>c</code>字符。</td>
+</tr>
+<tr>
+<td> <code>\d</code></td>
+<td>匹配一个数字字符。等价于[0-9]。</td>
+</tr>
+<tr>
+<td> <code>\D</code></td>
+<td>匹配一个非数字字符。等价于<code>[^0-9]</code>。</td>
+</tr>
+<tr>
+<td> <code>\f</code></td>
+<td>匹配一个换页符。等价于<code>\x0c</code>和<code>\cL</code>。</td>
+</tr>
+<tr>
+<td> <code>\n</code></td>
+<td>匹配一个换行符。等价于\x0a和\cJ。</td>
+</tr>
+<tr>
+<td> <code>\r</code></td>
+<td>匹配一个回车符。等价于\x0d和\cM。</td>
+</tr>
+<tr>
+<td> <code>\s</code></td>
+<td>匹配任何空白字符，包括空格、制表符、换页符等等。等价于<code>[ \f\n\r\t\v]</code>。</td>
+</tr>
+<tr>
+<td> <code>\S</code></td>
+<td>匹配任何非空白字符。等价于<code>[^ \f\n\r\t\v]</code>。</td>
+</tr>
+<tr>
+<td> <code>\t</code></td>
+<td>匹配一个制表符。等价于\x09和\cI。</td>
+</tr>
+<tr>
+<td> <code>\v</code></td>
+<td>匹配一个垂直制表符。等价于\x0b和\cK。</td>
+</tr>
+<tr>
+<td> <code>\w</code></td>
+<td>匹配包括下划线的任何单词字符。等价于<code>[A-Za-z0-9_]</code>。</td>
+</tr>
+<tr>
+<td> <code>\W</code></td>
+<td>匹配任何非单词字符。等价于<code>[^A-Za-z0-9_]</code>。</td>
+</tr>
+<tr>
+<td> <code>\xn</code></td>
+<td>匹配n，其中n为十六进制转义值。十六进制转义值必须为确定的两个数字长。例如，<code>\x41</code>匹配<code>A</code>。<code>\x041</code>则等价于<code>\x04&amp;1</code>。正则表达式中可以使用ASCII编码。</td>
+</tr>
+<tr>
+<td> <code>\num</code></td>
+<td>匹配num，其中num是一个正整数。对所获取的匹配的引用。例如，<code>(.)\1</code>匹配两个连续的相同字符。</td>
+</tr>
+<tr>
+<td> <code>\n</code></td>
+<td>标识一个八进制转义值或一个向后引用。如果\n之前至少n个获取的子表达式，则n为向后引用。否则，如果n为八进制数字（0-7），则n为一个八进制转义值。</td>
+</tr>
+<tr>
+<td> <code>\nm</code></td>
+<td>标识一个八进制转义值或一个向后引用。如果<code>\nm</code>之前至少有nm个获得子表达式，则nm为向后引用。如果<code>\nm</code>之前至少有n个获取，则n为一个后跟文字m的向后引用。如果前面的条件都不满足，若n和m均为八进制数字（0-7），则<code>\nm</code>将匹配八进制转义值nm。</td>
+</tr>
+<tr>
+<td> <code>\nml</code></td>
+<td>如果n为八进制数字（0-7），且m和l均为八进制数字（0-7），则匹配八进制转义值nml。</td>
+</tr>
+<tr>
+<td> <code>\un</code></td>
+<td>匹配n，其中n是一个用四个十六进制数字表示的Unicode字符。例如，\u00A9匹配版权符号<code>（&amp;copy;）</code>。</td>
+</tr>
+<tr>
+<td> <code>\&lt;</code> <code>\&gt;</code></td>
+<td>匹配词（word）的开始（\&lt;）和结束（>）。例如正则表达式\<the\>能够匹配字符串<code>for the wise</code>中的<code>the</code>，但是不能匹配字符串<code>otherwise</code>中的<code>the</code>。注意：这个元字符不是所有的软件都支持的。</the\></td>
+</tr>
+<tr>
+<td> <code>\(</code> <code>\)</code></td>
+<td>将 <code>\(</code> 和 <code>\)</code> 之间的表达式定义为<code>组</code>（group），并且将匹配这个表达式的字符保存到一个临时区域（一个正则表达式中最多可以保存9个），它们可以用 <code>\1</code> 到<code>\9</code> 的符号来引用。</td>
+</tr>
+<tr>
+<td> `\</td>
+<td>`</td>
+<td>将两个匹配条件进行逻辑<code>或</code>（Or）运算。例如正则表达式(him`\</td>
+<td><code>her) 匹配</code>it belongs to him<code>和</code>it belongs to her<code>，但是不能匹配</code>it belongs to them.`。注意：这个元字符不是所有的软件都支持的。</td>
+</tr>
+<tr>
+<td> <code>+</code></td>
+<td>匹配1或多个正好在它之前的那个字符。例如正则表达式9+匹配9、99、999等。注意：这个元字符不是所有的软件都支持的。</td>
+</tr>
+<tr>
+<td> <code>?</code></td>
+<td>匹配0或1个正好在它之前的那个字符。注意：这个元字符不是所有的软件都支持的。</td>
+</tr>
+<tr>
+<td> <code>{i} {i,j}</code></td>
+<td>匹配指定数目的字符，这些字符是在它之前的表达式定义的。例如正则表达式<code>A[0-9]{3}</code> 能够匹配字符<code>A</code>后面跟着正好3个数字字符的串，例如A123、A348等，但是不匹配A1234。而正则表达式[0-9]{4,6} <code>匹配连续的任意4个、5个或者6个数字</code></td>
+</tr>
+</tbody>
+</table>
+<p> 原文链接: <a href="http://blog.csdn.net/zhz459880251/article/details/50186967" target="_blank" rel="external">http://blog.csdn.net/zhz459880251/article/details/50186967</a></p>
+</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="zhzDeveloper.github.io/2015/12/05/正则表达式在iOS中的运用/" data-id="cj3uzbmex003jxzhlnhvwpoil" class="article-share-link">分享</a><div class="tags"></div><div class="post-nav"><a href="/2015/12/07/PHP基础--页面传值,输入验证/" class="pre">PHP基础--页面传值,输入验证</a><a href="/2015/12/04/PHP基础--数据类型/" class="next">PHP基础--数据类型</a></div></div></div></div><div class="pure-u-1 pure-u-md-1-4"><div id="sidebar"><div class="widget"><form action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank" class="search-form"><input type="search" name="word" maxlength="20" placeholder="Search"/><input type="hidden" name="si" value="zhzDeveloper.github.io"/><input name="tn" type="hidden" value="bds"/><input name="cl" type="hidden" value="3"/><input name="ct" type="hidden" value="2097152"/><input name="s" type="hidden" value="on"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS-分类/">iOS-分类</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios平台/">ios平台</a><span class="category-list-count">67</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios平台-UI控件/">ios平台,UI控件</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios平台-图片处理/">ios平台,图片处理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios平台-开发工具/">ios平台,开发工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/swift/">swift</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/开发工具/">开发工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/正则/">正则</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机技巧/">计算机技巧</a><span class="category-list-count">3</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/数据cache/">数据cache</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/Python 爬虫初探/">Python 爬虫初探</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/12/数组排序sortedArrayUsingComparator/">数组排序sortedArrayUsingComparator</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/13/macOS Sierra 找回消失的 “任何来源”/">macOS Sierra 找回消失的 “任何来源”</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/11/Method Swizzling(转载+补充)/">Method Swizzling(转载+补充)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/10/instancesRespondToSelector与respondsToSelector的区别/">instancesRespondToSelector与respondsToSelector的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/08/生成Description/">生成Description</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/26/忽略编译警告/">忽略编译警告</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/09/iOS-面试题整理/">iOS-面试题整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/07/GCD小结/">GCD小结</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2017 <a href="/." rel="nofollow">zhz blogs.</a> Powered by<a rel="nofollow" target="_blank" href="https://github.com/zhzDeveloper"> zhz.</a><a rel="nofollow" target="_blank" href="http://zhzdeveloper.github.io/"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/zhzDeveloper"> zhz.</a></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>SourceTree 学习总结(摘抄) | zhz blogs</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/6.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.2/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.2/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">SourceTree 学习总结(摘抄)</h1><a id="logo" href="/.">zhz blogs</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">SourceTree 学习总结(摘抄)</h1><div class="post-meta">Sep 30, 2015<span> | </span><span class="category"><a href="/categories/ios平台-开发工具/">ios平台,开发工具</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span></div><div class="post-content"><ul>
+<li><p>SourceTree 功具列</p>
+<ul>
+<li><p>Commit 程式修改完畢，並Add完異動檔案後，commit 到 local repository。</p>
+</li>
+<li><p>Checkout 從commit history中checkout特定的commit點的程式。</p>
+</li>
+<li><p>Reset 將有異動的檔案回覆到之前的狀態(新增的檔案無法reset)，可選擇單一檔案或全部有異動的檔案。</p>
+</li>
+<li><p>Stash 隱藏所有的異動，並回覆到前一次的版本。stash之後，可在左側的STASHES欄位看到各個異動檔案diff的狀態。</p>
+</li>
+<li><p>Add 將有異動及新增的檔案放到index區，準備commit。</p>
+</li>
+<li><p>Remove 刪除檔案，並不再traking該檔案。</p>
+</li>
+<li><p>Add/Remove 刪除不是透過Git Remove掉的已被刪除的檔案，並新增異動檔案到index區。</p>
+</li>
+<li><p>Fetch 到remote端(若是用Dropbox，則是與Dropbox的檔案進行同步)抓取別人commit的檔案，並放在local端的repository。有時別人已push到Dropbox，但SourceTree的Pull卻未顯示，這時點按Fetch就對了。</p>
+</li>
+<li><p>Pull 從remote端抓取更新檔(目前的檔案都必需是commit的狀態才能執行)。</p>
+</li>
+<li><p>Push 將local端commit好的檔案傳送到remote端。</p>
+</li>
+<li><p>Tag 將某一個已commit的狀態設定別名，如(上線版_1.0)，tag 名稱不能有空白！</p>
+</li>
+<li><p>Terminal 開啟終端機，並切換到該專案目錄下。</p>
+</li>
+</ul>
+<p>该入门教程的流程是这样的；</p>
+<p>什么是Git—————–&gt;为什么选择Git—————–&gt;如何安装Git到MAC OS X——————&gt;如何使用Git</p>
+<p>具体如下；</p>
+<p>1, 首先要了解什么是Git。</p>
+<p>简而言之，Git是一个分布式的代码版本管理工具。类似的常用工具还有SVN,CVS。</p>
+<p>概念了解参见；<a href="http://baike.baidu.com/subview/1531489/12032478.htm?fromId=1531489&amp;from=rdtself&amp;fr=wordsearch" target="_blank" rel="external">http://baike.baidu.com/subview/1531489/12032478.htm?fromId=1531489&amp;from=rdtself&amp;fr=wordsearch</a></p>
+<p>2，为什么要使用Git。</p>
+<p>Git相比SVN，CVS，最大的特点也是优点在于提供分布式的代码管理。这不是说SVN等不具有该功能，但就目前来看，Git更完善，而且也越来越多地被人们所接受。前途和易用是我一向选择的基准。</p>
+<p>在使用中，目前体验到最大的相比SVN的好处有；<br>分支代码只有一份！log在本地！合并代码更加方便！更加安全！目录更加简洁！</p>
+<p>简单做下解释；</p>
+<p>分支代码只有一份！<br>使用过svn的童鞋想必都知道，当我们要开发一个新功能或者增加一个新版本或者修改一个复杂bug的时候，通常需要copy整份代码到本地一个目录，然后添加到svn服务器上进行代码管理。<br>而Git不同，Git可以创建许多branches，每个branch都是独立的，当我们需要修改代码的时候，commit也只是对本地仓库的修改。如果使用SourceTree,我们会发现在工具栏的Git Flow功能，已经很好的为此做了准备。</p>
+<p>log在本地！<br>svn的log都是存储在服务器上的，当我们要查阅修改记录的时候，必须要能够连接上远程服务器，并且具有权限。而Git不同，Git对于本地仓库的修改记录都是在本地上的，方便查阅。</p>
+<p>合并代码更加方便！<br>因为Git支持本地无限Branches，当我们个体在本地创建多个branches用于不同目的的时候（修改，新增，探索），合并一份代码显然要比svn合并一堆工程copy更加简单。</p>
+<p>更加安全！<br>Git的commit命令不同于SVN，commit只是对本地仓库代码的一次更新。当需要提交到master远程仓库，或者其他远程分支仓库的时候，需要使用push功能。虽然增加了一个过程，却可以防止随意修改导致后期合并出现大问题的风险。</p>
+<p>目录更加简洁！<br>在Git本地仓库根目录，只有一个.git文件,它包含了所有的管理信息。而SVN想必大家都知道，每个子目录下都有噁心的.svn。这个当需要修改文件冲突等问题时，就需要考虑了。肯定是一个文件简单。</p>
+<p>3, 如何安装Git到MAC OS X<br>这里介绍两种方式；<br>一，使用Git command－line<br>二，使用GUI工具SourceTree,功能很强大，很方便</p>
+<p>在进行安装前，要说一下，Git和SVN一样，都需要创建一个服务器的，他们都可以创建自己的版本管理服务器。对于个人和小团队来说，使用托管服务器可能更合适，<br>常见的有Github 和 Bitbucket。这里我介绍下Bitbucket，Github因为没有个人免费仓库使用，代码放上去就是开源的，所以这里我选择Bitbucket。另外，现在Bitbucket的个人仓库相关页面已经基本汉化了。注册流程也比较简单。<br>详见链接；<a href="https://bitbucket.org/" target="_blank" rel="external">https://bitbucket.org/</a></p>
+<p>这里先介绍下使用Command-line。<br>1，下载Git installer，地址；<a href="http://git-scm.com/downloads" target="_blank" rel="external">http://git-scm.com/downloads</a><br>2，下载之后打开，双击.pkg安装<br>3， 打开终端，使用git –version命令查看安装版本，有就是安装成功了<br>/<em>以下4.5命令如果已经使用Bitbucket创建过了，将会自动包含</em>/<br>4，创建一个全球用户名<br>git config –global user.name “FIRST_NAME LAST_NAME”<br>5，创建一个全球邮箱<br>git config –global user.email “MY_NAME@example.com”<br>6, 如果不想每次连接远程仓库都输入密码的话，输入如下命令<br>git credential-osxkeychain<br>——&gt;等待<br>git config –global credential.helper osxkeychain</p>
+<h1 id="Set-git-to-use-the-osxkeychain-credential-helper"><a href="#Set-git-to-use-the-osxkeychain-credential-helper" class="headerlink" title="Set git to use the osxkeychain credential helper"></a>Set git to use the osxkeychain credential helper</h1><p>到此Git就安装完成了。</p>
+<p>二，关于SourceTree这里先不做介绍。初始安装和SVN类似。</p>
+<p>4， 如何使用Git<br>这里也介绍两种方式<br>一，使用command<br>二，使用SourceTree</p>
+<p>先介绍第一种；Command line</p>
+<p>使用终端的命令行时，首先我们要有一定的linux命令行知识。实际使用中经常用到的比较少，这里只介绍一些必要的。<br>参考链接；<a href="http://www.renfei.org/blog/mac-os-x-terminal-101.html" target="_blank" rel="external">http://www.renfei.org/blog/mac-os-x-terminal-101.html</a></p>
+<p>linux基础命令；<br>sudo -s   获取绝对用户权限<br>cd xxx    进入xxx目录<br>ls (-a/-A)   显示当前路径下所有文件(隐藏的)<br>pwd       显示当前绝对路径<br>mkdir  xxx   创建文件夹xxx<br>man xxx     查看xxx命令手册</p>
+<p>然后介绍下Git基础命令的含义；<br>clone   克隆远程仓库<br>init       初始化仓库<br>remote 连接远程仓库<br>pull      从远程仓库下拉获取新数据<br>push    将本地仓库新增或修改文件上传到远程仓库<br>add     添加文件或者修改文件，commit以及push之前使用<br>log      当前仓库提交过的日志信息<br>status  当前仓库版本状态<br>commit 提交到当前仓库中<br>branch 分支命令，相关增删查操作<br>checkout 使用远程仓库最后一个版本完全覆盖当前仓库内容／选择分支branch<br>diff      对比版本内容<br>merge   合并版本内容<br>详细参见链接；<a href="https://confluence.atlassian.com/display/BITBUCKET/Bitbucket+Documentation+Home" target="_blank" rel="external">https://confluence.atlassian.com/display/BITBUCKET/Bitbucket+Documentation+Home</a></p>
+<p>使用Git，我们当然要有一个远程仓库，这里假设我们已经创建好了Bitbucket账号（创建远程仓库repository使用）。<br>创建远程仓库的方法这里也介绍两种方式。<br>一，使用Git 命令创建<br>二，在Bitbucket上创建</p>
+<p>第一种，使用Git 命令行</p>
+<p>初始化<br>git init<br>———&gt;<br>从Bitbucket上复制仓库地址<br>———&gt;<br>添加别名为origin的源到远程仓库地址<br>git  remote  add  origin  <a href="https://myAccountName@bitbucket.org/myAccountName/myRepositoryName.git" target="_blank" rel="external">https://myAccountName@bitbucket.org/myAccountName/myRepositoryName.git</a></p>
+<p>第二种，Bitbucket上创建远程仓库<br>注册之后按照提示创建即可，非常简单。。。不再复述。<br>详见参考；<a href="https://confluence.atlassian.com/display/BITBUCKET/Bitbucket+Documentation+Home中的Bitbucket" target="_blank" rel="external">https://confluence.atlassian.com/display/BITBUCKET/Bitbucket+Documentation+Home中的Bitbucket</a> 101文档</p>
+<p>－－－－－－－－－以上为初始创建－－－－－－－－－－－－－－华丽的分割线－－－－－－－－－－－－－－－以下为操作版本库－－－－－－－－－－－－－－－－－－－</p>
+<p>有了远程仓库Repostiory，我们该添加代码或者其他文件什么的了</p>
+<p>这里还是介绍两种；<br>一， 使用command－line<br>二， 使用SourceTree</p>
+<p>第一种， 使用command－line<br>在本地目录链接了远程仓库后（clone命令），使用如下方法操作文件。</p>
+<p>git add xxx           添加或要修改的xxx文件<br>——————&gt;<br>git commit -m “adding repo instructions”         提交xxx文件到本地仓库版本中 ；－m “XXXX” ；提交log<br>——————&gt;<br>git push -u origin master                提交xxx和log，到远程仓库origin（刚才创建的远程仓库Repository的别名）的master分支下</p>
+<p>第二种， 使用SourceTree<br>和svn类似，具体流程为；<br>add—-添加文件到索引—–&gt;commit——提交到本地仓库——&gt;push——–上传到远程仓库———&gt;</p>
+<p>之后就是对仓库中文件的增加修改删除操作了</p>
+<p>Ps：记得如果不是单独另需创建的branch，每次对本地仓库操作的时候都要使用 git pull命令，更新远程仓库到本地中，防止冲突。这点和SVN的update类似</p>
+<p>先介绍到这里，其实操作起来基本和SVN的命令行工具还有gui工具类似。<br>实际使用中主要区别还是分布式的开发模式不同。</p>
+<p>欢迎大家来补充～</p>
+<p>———————————————————————-分割线——————————-以下为对Git的Branch进行说明————————————————-</p>
+<p>Branch就是分支，Git相比SVN，最大的优点是完善的分布式管理。每一个本地的Repository，也就是仓库，都相当于一个本地版本服务器，在此基础上我们可以进行许多Branches，进行不同<br>类型的开发。Branch的目录统一性使得它的管理，包括merge非常简单方便。</p>
+<p>一， 先介绍下SourceTree下的Branch，<br>这里提供个比较详细的博客链接，供大家参考，图文并茂，已经解释的比较详细了，不再复述。<br>参考地址： <a href="http://www.takobear.tw/12/post/2014/02/bear-git-flow-sourcetreegit-flow.html" target="_blank" rel="external">http://www.takobear.tw/12/post/2014/02/bear-git-flow-sourcetreegit-flow.html</a></p>
+<p>二， 使用command－line创建branch分支</p>
+<p>待续。。。。。。</p>
+<p>———————————————————————-分割线——————————-以下为小技巧———————————————–</p>
+<p>1,   Git Stash命令<br>说到branches，使用Git开发较复杂的项目我想本地肯定会有多个。假如我们有一个临时紧急的重要任务，需要切换到其它branch，那么我们需要commit当前的内容。<br>但是，假如我修改的内容比较乱，或者其它什么原因不想提交到仓库中呢，这时候我们就可以使用Stash命令了。<br>$ git stash<br>这个命令的意思是将当前工作区的内容放到一个临时的区域，这意味着，使用git status,或者add commit命令，是无效的。<br>但是我们很好的保护了现场。接下来就可以checkout到其它branch工作了。</p>
+<p>回来之后，要回复一下现场。这里要简单说明下，stash命令的一个工作机制。<br>当使用了stash命令后，当前工作区域的内容会被push进一个栈队列里，是的，就和navigationController一样。<br>假如我们要回复现场。有两种选择；pop， 或者apply</p>
+<p>pop顾名思义，当前暂存内容从栈队列里消失了，apply则和objectAtIndex一样，队列里仍然有该暂存内容。</p>
+<p>当多个branches被我们stash的时候，会用到如下两个命令；</p>
+<p>git stash list: 显示Git暂存栈内的所有备份，可以利用这个列表来决定从那个地方恢复。<br>git stash clear: 清空Git栈。此时使用gitg等图形化工具会发现，原来stash的哪些节点都消失了。</p>
+<p>Ps:记住，多多使用git status 命令，就好比，好记性不如烂笔头。git 帮我们做好的笔记要多多查看，防止出错。</p>
+<p>2,  让Git忽略烦人不想追踪的文件<br>一，可以设置整个Git仓库需要忽略的文件。<br>$ git config –global core.excludesfile ~/.gitignore_global<br>$vim ~/.gitignore_global</p>
+<p>然后在.gitignore_global文件里面设置我们想要忽略的文件。比如添加如下</p>
+<h1 id="Mac-OS-X"><a href="#Mac-OS-X" class="headerlink" title="Mac OS X"></a>Mac OS X</h1><p>*.DS_Store</p>
+</li>
+</ul>
+<h1 id="Xcode"><a href="#Xcode" class="headerlink" title="Xcode"></a>Xcode</h1><p> <em>.pbxuser
+ </em>.mode1v3<br> <em>.mode2v3
+ </em>.perspectivev3<br> *.xcuserstate<br> project.xcworkspace/<br> xcuserdata/</p>
+<p> ＃Git<br> .gitingore<br> .gitingore.swp</p>
+<p> 之后保存就可以了。如果输入git status仍然提示有不期望的被追踪的文件。需要清理下<br> $ git rm –cache xxx    xxx为想要忽略的文件</p>
+<p> 好了，再也不会有烦人的文件了</p>
+<p> 二，可以单独为某个目录设置忽略文件。<br> 到想要忽略文件的目录下，<br> $ vim .gitignore<br> 添加如上规则的名字<br> 保存之后，退出，就可以了。</p>
+<p> 关于忽略文件的命名规则，请参考链接：<br> <a href="http://bdxnote.blog.163.com/blog/static/844423520124153051409/" target="_blank" rel="external">http://bdxnote.blog.163.com/blog/static/844423520124153051409/</a></p>
+<p> 原文链接: <a href="http://blog.csdn.net/zhz459880251/article/details/48831221" target="_blank" rel="external">http://blog.csdn.net/zhz459880251/article/details/48831221</a></p>
+</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="zhzDeveloper.github.io/2015/09/30/SourceTree 学习总结(摘抄)/" data-id="cj3uzbmdt001bxzhlfc2jaeim" class="article-share-link">分享</a><div class="tags"></div><div class="post-nav"><a href="/2015/09/30/动画切换rootViewController/" class="pre">动画切换rootViewController</a><a href="/2015/09/30/iOS9新功能, SpotLight应用内搜索/" class="next">iOS9新功能, SpotLight应用内搜索</a></div></div></div></div><div class="pure-u-1 pure-u-md-1-4"><div id="sidebar"><div class="widget"><form action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank" class="search-form"><input type="search" name="word" maxlength="20" placeholder="Search"/><input type="hidden" name="si" value="zhzDeveloper.github.io"/><input name="tn" type="hidden" value="bds"/><input name="cl" type="hidden" value="3"/><input name="ct" type="hidden" value="2097152"/><input name="s" type="hidden" value="on"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS-分类/">iOS-分类</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios平台/">ios平台</a><span class="category-list-count">67</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios平台-UI控件/">ios平台,UI控件</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios平台-图片处理/">ios平台,图片处理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios平台-开发工具/">ios平台,开发工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/swift/">swift</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/开发工具/">开发工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/正则/">正则</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机技巧/">计算机技巧</a><span class="category-list-count">3</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/数据cache/">数据cache</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/Python 爬虫初探/">Python 爬虫初探</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/12/数组排序sortedArrayUsingComparator/">数组排序sortedArrayUsingComparator</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/13/macOS Sierra 找回消失的 “任何来源”/">macOS Sierra 找回消失的 “任何来源”</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/11/Method Swizzling(转载+补充)/">Method Swizzling(转载+补充)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/10/instancesRespondToSelector与respondsToSelector的区别/">instancesRespondToSelector与respondsToSelector的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/08/生成Description/">生成Description</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/26/忽略编译警告/">忽略编译警告</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/09/iOS-面试题整理/">iOS-面试题整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/07/GCD小结/">GCD小结</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2017 <a href="/." rel="nofollow">zhz blogs.</a> Powered by<a rel="nofollow" target="_blank" href="https://github.com/zhzDeveloper"> zhz.</a><a rel="nofollow" target="_blank" href="http://zhzdeveloper.github.io/"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/zhzDeveloper"> zhz.</a></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>

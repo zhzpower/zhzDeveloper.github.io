@@ -1,0 +1,133 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>文字属性--Attributes | zhz blogs</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/6.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.2/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.2/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">文字属性--Attributes</h1><a id="logo" href="/.">zhz blogs</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">文字属性--Attributes</h1><div class="post-meta">Oct 24, 2015<span> | </span><span class="category"><a href="/categories/ios平台/">ios平台</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span></div><div class="post-content"><p> 先看个例子<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">NSDictionary *normalDict = @&#123;</div><div class="line">                             NSFontAttributeName: [UIFont systemFontOfSize:15],</div><div class="line">                             NSForegroundColorAttributeName: [UIColor greenColor]</div><div class="line">                             &#125;;</div><div class="line">NSDictionary *selectDict = @&#123;</div><div class="line">                       NSFontAttributeName: [UIFont systemFontOfSize:18],</div><div class="line">                       NSForegroundColorAttributeName: [UIColor redColor]</div><div class="line">                       &#125;;</div><div class="line"></div><div class="line">//设置正常状态</div><div class="line">[segmentControl setTitleTextAttributes:normalDict forState:UIControlStateNormal];</div><div class="line">//设置选中状态</div><div class="line">[segmentControl setTitleTextAttributes:selectDict forState:UIControlStateSelected];</div></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>默认值</th>
+<th>使用 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> NSFontAttributeName字体名, 字体大小</td>
+<td>Helvetica(Neue) 12</td>
+<td><code>NSFontAttributeName:[UIFont systemFontOfSize:20]</code></td>
+</tr>
+<tr>
+<td> NSParagraphStyleAttributeName(段落属性)</td>
+<td>defaultParagraphStyle</td>
+<td></td>
+</tr>
+<tr>
+<td> NSForegroundColorAttributeName字体颜色</td>
+<td>blackColor</td>
+<td>NSForegroundColorAttributeName:[UIColor redColor]</td>
+</tr>
+<tr>
+<td> NSBackgroundColorAttributeName背景颜色</td>
+<td>nil</td>
+<td>NSBackgroundColorAttributeName:[UIColor blackColor]</td>
+</tr>
+<tr>
+<td> NSLigatureAttributeName是否连字</td>
+<td>default 1: 默认连字, 0: 不连字(经测试没什么效果)</td>
+<td>NSLigatureAttributeName:@(0)</td>
+</tr>
+<tr>
+<td> NSKernAttributeName字间距</td>
+<td>含NSNumber的浮点值,修改默认的字距, 0表示禁用字距调整</td>
+<td>SKernAttributeName:@(30.5)</td>
+</tr>
+<tr>
+<td> NSStrikethroughStyleAttributeName是否带删除线</td>
+<td>0:不带, 1:带</td>
+<td>NSStrikethroughStyleAttributeName:@(1)</td>
+</tr>
+<tr>
+<td> NSUnderlineStyleAttributeName是否带下划线</td>
+<td>0:不带, 1:带</td>
+<td>NSUnderlineStyleAttributeName:@(1)</td>
+</tr>
+<tr>
+<td> NSStrokeColorAttributeName空心字外层线条颜色</td>
+<td>UIColor, default nil: same as foreground color</td>
+<td>需要和NSStrokeWidthAttributeName配合使用</td>
+</tr>
+<tr>
+<td> NSStrokeWidthAttributeName空心字外层线条宽度</td>
+<td>浮点型, 默认为0, 典型值3.0</td>
+<td>NSStrokeColorAttributeName:[UIColor greenColor],NSStrokeWidthAttributeName:@(3.0)</td>
+</tr>
+<tr>
+<td> NSShadowAttributeName字体阴影</td>
+<td>NSShadow类型, 默认为空(若有背景色, 阴影为背景色的阴影, 无背景色则为字体阴影)</td>
+<td>NSShadow *shadow = [[NSShadow alloc] init];shadow.shadowOffset = CGSizeMake(10, 10);NSShadowAttributeName:shadow</td>
+</tr>
+<tr>
+<td> 上面是iOS6.0</td>
+<td>以下都是7.0后添加的</td>
+<td></td>
+</tr>
+<tr>
+<td> NSTextEffectAttributeName特效(凹凸效果)</td>
+<td>默认nil</td>
+<td>NSTextEffectAttributeName:NSTextEffectLetterpressStyle</td>
+</tr>
+<tr>
+<td> NSAttachmentAttributeName富文本时用到(以后研究)</td>
+<td>默认为空</td>
+<td></td>
+</tr>
+<tr>
+<td> NSLinkAttributeName(添加链接)</td>
+<td>NSURL (preferred) or NSString</td>
+<td></td>
+</tr>
+<tr>
+<td> NSBaselineOffsetAttributeName行间距</td>
+<td>默认0</td>
+<td>NSBaselineOffsetAttributeName:@(10.0)</td>
+</tr>
+<tr>
+<td> NSUnderlineColorAttributeName下划线颜色</td>
+<td>UIColor, default nil: same as foreground color</td>
+<td>NSUnderlineColorAttributeName:[UIColor blackColor]</td>
+</tr>
+<tr>
+<td> NSStrikethroughColorAttributeName(删除线颜色)</td>
+<td>UIColor, default nil: same as foreground color</td>
+<td>NSStrikethroughColorAttributeName:[UIColor greenColor]</td>
+</tr>
+<tr>
+<td> NSObliquenessAttributeName斜体字</td>
+<td>NSNumber, 默认0:倾斜</td>
+<td>NSObliquenessAttributeName:@(2.0)</td>
+</tr>
+<tr>
+<td> NSExpansionAttributeName文本扁平化</td>
+<td>NSNumber, 默认0</td>
+<td>NSExpansionAttributeName:@(0.1)</td>
+</tr>
+<tr>
+<td> NSWritingDirectionAttributeName设置文字书写方向，从左向右书写或者从右向左书写</td>
+<td></td>
+<td>四种</td>
+<td></td>
+<td>NSWritingDirectionAttributeName: @[@(NSWritingDirectionRightToLeft</td>
+<td>NSWritingDirectionOverride)]</td>
+</tr>
+<tr>
+<td> NSVerticalGlyphFormAttributeName排版</td>
+<td>0 表示横排文本，1 表示竖排文本(经测试iOS中无竖排)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="1-增加了链接"><a href="#1-增加了链接" class="headerlink" title="1.增加了链接"></a>1.增加了链接</h2><p> 给UITextView增加了链接<br> 现在在iOS添加你自己的Twitter账户更加简单了，现在你可以给一个NSAttributedString增加链接了，然后当它被点击的时候唤起一个定制的action。</p>
+<p> 首先，创建一个NSAttributedString然后增加给它增加一个NSLinkAttributeName 属性，见以下：<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:@&quot;This is an example by @marcelofabri_&quot;]; </div><div class="line">[attributedString addAttribute:NSLinkAttributeName </div><div class="line">                         value:@&quot;username://marcelofabri_&quot; </div><div class="line">                         range:[[attributedString string] rangeOfString:@&quot;@marcelofabri_&quot;]]; </div><div class="line">  </div><div class="line">  </div><div class="line">NSDictionary *linkAttributes = @&#123;NSForegroundColorAttributeName: [UIColor greenColor], </div><div class="line">                                 NSUnderlineColorAttributeName: [UIColor lightGrayColor], </div><div class="line">                                 NSUnderlineStyleAttributeName: @(NSUnderlinePatternSolid)&#125;; </div><div class="line">  </div><div class="line">// assume that textView is a UITextView previously created (either by code or Interface Builder) </div><div class="line">textView.linkTextAttributes = linkAttributes; // customizes the appearance of links </div><div class="line">textView.attributedText = attributedString; </div><div class="line">textView.delegate = self;</div></pre></td></tr></table></figure></p>
+<p> 这样就可以让链接在文本中显示。然而，你也可以控制当链接被点击的时候会发生什么，实现这个可以使用UITextViewDelegate协议的新的shouldInteractWithURL方法，就像这样：<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange &#123; </div><div class="line">    if ([[URL scheme] isEqualToString:@&quot;username&quot;]) &#123; </div><div class="line">        NSString *username = [URL host];  </div><div class="line">        // do something with this username </div><div class="line">        // ... </div><div class="line">        return NO; </div><div class="line">    &#125; </div><div class="line">    return YES; // let the system open this URL </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="2-文字书写方向"><a href="#2-文字书写方向" class="headerlink" title="2.文字书写方向"></a>2.文字书写方向</h2><p> LRE: NSWritingDirectionLeftToRight  | NSWritingDirectionEmbedding,<br> RLE: NSWritingDirectionRightToLeft | NSWritingDirectionEmbedding,<br> LRO: NSWritingDirectionLeftToRight | NSWritingDirectionOverride,<br> RLO: NSWritingDirectionRightToLeft | NSWritingDirectionOverride,</p>
+<h2 id="3-段落属性"><a href="#3-段落属性" class="headerlink" title="3.段落属性"></a>3.段落属性</h2><p> NSMutableParagraphStyle *<br>     style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];<br>     style.lineSpacing = 10;//增加行高<br>     style.headIndent = 10;//头部缩进，相当于左padding<br>     style.tailIndent = -10;//相当于右padding<br>     style.lineHeightMultiple = 1.5;//行间距是多少倍<br>     style.alignment = NSTextAlignmentLeft;//对齐方式<br>     style.firstLineHeadIndent = 20;//首行头缩进<br>     style.paragraphSpacing = 10;//段落后面的间距<br>     style.paragraphSpacingBefore = 20;//段落之前的间距<br>     [attrString addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, length)];</p>
+<p> 可以参考(不过有的已经废弃了):<a href="http://www.itnose.net/detail/6177538.html" target="_blank" rel="external">http://www.itnose.net/detail/6177538.html</a></p>
+<p> 原文链接: <a href="http://blog.csdn.net/zhz459880251/article/details/49385277" target="_blank" rel="external">http://blog.csdn.net/zhz459880251/article/details/49385277</a></p>
+</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="zhzDeveloper.github.io/2015/10/24/文字属性--Attributes/" data-id="cj3uzbmeu003dxzhl06pmv1b9" class="article-share-link">分享</a><div class="tags"></div><div class="post-nav"><a href="/2015/10/24/扫描AVCapture -- 完整版(指定区域+闪光灯)/" class="pre">扫描AVCapture -- 完整版(指定区域+闪光灯)</a><a href="/2015/10/21/抽屉 侧拉门 效果(仿网易+改善)/" class="next">抽屉 侧拉门 效果(仿网易+改善)</a></div></div></div></div><div class="pure-u-1 pure-u-md-1-4"><div id="sidebar"><div class="widget"><form action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank" class="search-form"><input type="search" name="word" maxlength="20" placeholder="Search"/><input type="hidden" name="si" value="zhzDeveloper.github.io"/><input name="tn" type="hidden" value="bds"/><input name="cl" type="hidden" value="3"/><input name="ct" type="hidden" value="2097152"/><input name="s" type="hidden" value="on"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS-分类/">iOS-分类</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios平台/">ios平台</a><span class="category-list-count">67</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios平台-UI控件/">ios平台,UI控件</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios平台-图片处理/">ios平台,图片处理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios平台-开发工具/">ios平台,开发工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/swift/">swift</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/开发工具/">开发工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/正则/">正则</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机技巧/">计算机技巧</a><span class="category-list-count">3</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/数据cache/">数据cache</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/Python 爬虫初探/">Python 爬虫初探</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/12/数组排序sortedArrayUsingComparator/">数组排序sortedArrayUsingComparator</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/13/macOS Sierra 找回消失的 “任何来源”/">macOS Sierra 找回消失的 “任何来源”</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/11/Method Swizzling(转载+补充)/">Method Swizzling(转载+补充)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/10/instancesRespondToSelector与respondsToSelector的区别/">instancesRespondToSelector与respondsToSelector的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/08/生成Description/">生成Description</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/26/忽略编译警告/">忽略编译警告</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/09/iOS-面试题整理/">iOS-面试题整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/07/GCD小结/">GCD小结</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2017 <a href="/." rel="nofollow">zhz blogs.</a> Powered by<a rel="nofollow" target="_blank" href="https://github.com/zhzDeveloper"> zhz.</a><a rel="nofollow" target="_blank" href="http://zhzdeveloper.github.io/"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/zhzDeveloper"> zhz.</a></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>iOS9 更新 | zhz blogs</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/6.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.2/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.2/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">iOS9 更新</h1><a id="logo" href="/.">zhz blogs</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">iOS9 更新</h1><div class="post-meta">Sep 29, 2015<span> | </span><span class="category"><a href="/categories/ios平台/">ios平台</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span></div><div class="post-content"><h1 id="iOS9-更新"><a href="#iOS9-更新" class="headerlink" title="iOS9 更新"></a>iOS9 更新</h1><hr>
+<h2 id="网络适配-ATS-改用更安全的HTTPs"><a href="#网络适配-ATS-改用更安全的HTTPs" class="headerlink" title="网络适配_ATS: 改用更安全的HTTPs"></a>网络适配_ATS: 改用更安全的HTTPs</h2><ul>
+<li><p>为了强制增强数据访问安全， iOS9 默认会把 所有的http请求 所有从NSURLConnection 、 CFURL 、 NSURLSession发出的 HTTP 请求，都改为 HTTPS 请求：iOS9.x-SDK编译时，默认会让所有从NSURLConnection 、 CFURL 、 NSURLSession发出的 HTTP 请求统一采用TLS 1.2 协议。因为 AFNetworking 现在的版本底层使用了 NSURLConnection ，众多App将被影响（基于iOS8.x-SDK的App不受影响）。服务器因此需要更新，以解析相关数据。如不更新，可通过在 Info.plist 中声明，倒退回不安全的网络请求。而这一做法，官方文档称为ATS，全称为App Transport Security，是iOS9的一个新特性。</p>
+</li>
+<li><p>一个符合 ATS 要求的 HTTPS，应该满足如下条件：</p>
+<ul>
+<li>Transport Layer Security协议版本要求TLS1.2以上</li>
+<li>服务的Ciphers配置要求支持Forward Secrecy等 </li>
+<li>证书签名算法符合ATS要求等<br>关于App Transport Security，每个应用都属于4个大类当中的一类。我们来看看每一个大类都是怎样影响应用的。</li>
+</ul>
+<p>—     | 分类名 | 解释<br>—–|—— | ———–</p>
+</li>
+</ul>
+<ol>
+<li>| HTTPS Only |（只有HTTPS，所有情况下都使用ATS）    如果你的应用只基于支持HTTPS的服务器，那么你太幸运了。你的应用不需要做任何改变。但是，注意App Transport Security要求TLS 1.2而且它要求站点使用支持forward secrecy协议的密码。证书也要求是符合ATS规格的。因此慎重检查与你的应用交互的服务器是不是符合ATS的要求非常重要。</li>
+<li>| Mix &amp; Match（混合）|    你的应用与一个不符合ATS要求的服务器工作是很有可能的。在这种情况下，你需要告诉操作系统哪些站点是涉及到的然后在你的应用的 Info.plist文件中指明哪些要求没有达到。</li>
+<li>| Opt Out（禁用ATS）    | 如果你在创建一个网页浏览器，那么你有一个更大的麻烦。因为你不可能知道你的用户将要访问那个网页，你不可能指明这些网页是否支持ATS要求且在HTTPS上传输。在这种情况下，除了全部撤销 App Transport Security 没有其它办法。</li>
+<li><p>| Opt Out With Exceptions |（除特殊情况外，都不使用ATS）    当你的应用撤消了App Transport Security,，但同时定义了一些例外。这非常有用就是当你的应用从很多的服务器上取数据，但是也要与一个你可控的API交互。在这种情况下，在应用的Info.plist文件中指定任何加载都是被允许的，但是你也指定了一个或多个例外来表明哪些是必须要求 App Transport Security的。    </p>
+<p><strong>下面分别做一下介绍：</strong></p>
+</li>
+</ol>
+<ul>
+<li><p>1.HTTPS Only （只有HTTPS，所有情况下都使用ATS）</p>
+<p>如果你的应用只基于支持HTTPS的服务器，那么你太幸运了。你的应用不需要做任何改变。</p>
+<p>唯一需要做的事情就是使用 <code>NSURLSession</code> 。如果你的开发目标是<code>iOS 9</code>或者 <code>OS X EI Capitan</code>之后，ATS 的最佳实践将会应用到所有基于 <code>NSURLSession</code> 的网络。</p>
+<p>但也有人遇到过这样的疑惑：服务器已支持<code>TLS 1.2 SSL</code> ，但iOS9上还是不行，还要进行本文提出的适配操作。</p>
+<p>那是因为：要注意 <code>App Transport Security</code>要求 <code>TLS 1.2</code>，而且它要求站点使用支持<code>forward secrecy</code>协议的密码。证书也要求是符合ATS规格的，ATS只信任知名CA颁发的证书，小公司所使用的 self signed certificate，还是会被ATS拦截。。因此慎重检查与你的应用交互的服务器是不是符合ATS的要求非常重要。对此，建议使用下文中给出的NSExceptionDomains，并将你们公司的域名挂在下面。</p>
+<p>你的应用与一个不符合ATS要求的服务器工作是很有可能的，</p>
+<p>当你遇到以下三个不符合 ATS 要求的服务器的域名时：</p>
+<p>  api.insecuredomain.com<br>  cdn.domain.com<br>  thatotherdomain.com<br>你可以分别设置如下：</p>
+<p>api.insecuredomain.com</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">Info.plist 配置中的XML源码如下所示:</div><div class="line"></div><div class="line">      &lt;key&gt;NSAppTransportSecurity&lt;/key&gt;</div><div class="line">      &lt;dict&gt;</div><div class="line">          &lt;key&gt;NSExceptionDomains&lt;/key&gt;</div><div class="line">          &lt;dict&gt;</div><div class="line">              &lt;key&gt;api.insecuredomain.com&lt;/key&gt;</div><div class="line">              &lt;dict&gt;</div><div class="line">                  &lt;key&gt;NSExceptionAllowsInsecureHTTPLoads&lt;/key&gt;</div><div class="line">                  &lt;false/&gt;</div><div class="line">              &lt;/dict&gt;</div><div class="line">          &lt;/dict&gt;</div><div class="line">      &lt;/dict&gt;</div><div class="line">      </div><div class="line"></div><div class="line"></div><div class="line">我们定义的第一个“例外”（Exception）告诉ATS当与这个子域交互的时候撤销了必须使用HTTPS的要求。注意这个仅仅针对在“例外”（Exception）中声明了的子域。非常重要的一点是要理解NSExceptionAllowsInsecureHTTPLoads关键字并不仅仅只是与使用HTTPS相关。这个“例外”（Exception）指明了对于那个域名，所有的App Transport Security的要求都被撤销了。</div><div class="line"></div><div class="line">cdn.domain.com Info.plist 配置中的XML源码如下所示:</div></pre></td></tr></table></figure>
+<p><key>NSAppTransportSecurity</key></p>
+<dict><br>    <key>NSExceptionDomains</key><br>    <dict><br>        <key>cdn.somedomain.com</key><br>        <dict><br>            <key>NSThirdPartyExceptionMinimumTLSVersion</key><br>            <string>TLSv1.1</string><br>        </dict><br>    </dict><br></dict>
+
+
+</li>
+</ul>
+<p> 很可能你的应用是与一个支持HTTPS传输数据的服务器交互，但是并没有使用TLS 1.2或更高。在这种情况下，你定义一个“例外”（Exception），它指明应该使用的最小的TLS的版本。这比完全撤销那个域名的App Transport Security要更好更安全。</p>
+<p> thatotherdomain.com</p>
+<p> Info.plist 配置中的XML源码如下所示:</p>
+<pre><code>&lt;key&gt;NSAppTransportSecurity&lt;/key&gt;
+ &lt;dict&gt;
+     &lt;key&gt;NSExceptionDomains&lt;/key&gt;
+     &lt;dict&gt;
+         &lt;key&gt;thatotherdomain.com&lt;/key&gt;
+         &lt;dict&gt;
+             &lt;!--适用于这个特定域名下的所有子域--&gt;
+             &lt;key&gt;NSIncludesSubdomains&lt;/key&gt;
+             &lt;true/&gt;
+             &lt;!--扩展可接受的密码列表：这个域名可以使用不支持 forward secrecy 协议的密码--&gt;
+             &lt;key&gt;NSExceptionRequiresForwardSecrecy&lt;/key&gt;
+             &lt;false/&gt;
+             &lt;!--允许App进行不安全的HTTP请求--&gt;
+             &lt;key&gt;NSExceptionAllowsInsecureHTTPLoads&lt;/key&gt;
+             &lt;true/&gt;
+             &lt;!--在这里声明所支持的 TLS 最低版本--&gt;
+             &lt;key&gt;NSExceptionMinimumTLSVersion&lt;/key&gt;
+             &lt;string&gt;TLSv1.1&lt;/string&gt;
+         &lt;/dict&gt;
+     &lt;/dict&gt;
+ &lt;/dict&gt;
+</code></pre><p> NSIncludesSubdomains 关键字告诉 App Transport Security 这个“例外”（Exception）适用于这个特定域名的所有子域。这个“例外”（Exception）还进一步通过扩展可接受的密码列表来定义这个域名可以使用不支持forward secrecy( NSExceptionRequiresForwardSecrecy ) 协议的密码。想了解更多关于forward secrecy的信息，推荐去看官方文档 Apple’s technote 。</p>
+<p> 如果你的App中同时用到了这三个域名，那么应该是这样：</p>
+<pre><code>&lt;key&gt;NSAppTransportSecurity&lt;/key&gt;
+   &lt;dict&gt;
+       &lt;key&gt;NSExceptionDomains&lt;/key&gt;
+       &lt;dict&gt;
+           &lt;key&gt;api.insecuredomain.com&lt;/key&gt;
+           &lt;dict&gt;
+               &lt;key&gt;NSExceptionAllowsInsecureHTTPLoads&lt;/key&gt;
+               &lt;false/&gt;
+           &lt;/dict&gt;
+           &lt;key&gt;cdn.somedomain.com&lt;/key&gt;
+           &lt;dict&gt;
+               &lt;key&gt;NSThirdPartyExceptionMinimumTLSVersion&lt;/key&gt;
+               &lt;string&gt;TLSv1.1&lt;/string&gt;
+           &lt;/dict&gt;
+           &lt;key&gt;thatotherdomain.com&lt;/key&gt;
+           &lt;dict&gt;
+               &lt;key&gt;NSIncludesSubdomains&lt;/key&gt;
+               &lt;true/&gt;
+               &lt;key&gt;NSExceptionRequiresForwardSecrecy&lt;/key&gt;
+               &lt;false/&gt;
+           &lt;/dict&gt;
+       &lt;/dict&gt;
+   &lt;/dict&gt;
+</code></pre><p> enter image description here</p>
+<ul>
+<li><ol>
+<li>Opt Out（禁用ATS）</li>
+</ol>
+<p>上面是比较严谨的做法，指定了能访问哪些特定的HTTP。当然也有暴力的做法： 彻底倒退回不安全的HTTP网络请求，能任意进行HTTP请求，比如你在开发一款浏览器App，或者你想偷懒，或者后台想偷懒，或者公司不给你升级服务器。。。</p>
+<p>你可以在Info.plist 配置中改用下面的XML源码：</p>
+<p>  <key>NSAppTransportSecurity</key><br>  <dict></dict></p>
+<pre><code>&lt;!--彻底倒退回不安全的HTTP网络请求，能任意进行HTTP请求 (不建议这样做)--&gt;
+&lt;key&gt;NSAllowsArbitraryLoads&lt;/key&gt;
+&lt;true/&gt;
+</code></pre><p>  <br>在 plist 文件里显示如下：</p>
+<p>enter image description here</p>
+</li>
+<li><ol>
+<li>Opt Out With Exceptions（除特殊情况外，都不使用ATS）</li>
+</ol>
+<p>上面已经介绍了三种情景，还有一种可能你也会遇到：</p>
+<p>当你的应用撤消了App Transport Security,，但同时定义了一些“例外”（Exception）。当你的应用从很多的服务器上取数据，但是也要与一个你可控的API交互。在这种情况下，在应用的Info.plist文件中指定任何加载都是被允许的，但是你也指定了一个或多个“例外”（Exception）来表明哪些是必须要求 App Transport Security的。下面是Info.plist文件应该会有的内容：</p>
+<p><key>NSAppTransportSecurity</key></p>
+<pre><code>&lt;dict&gt;
+    &lt;key&gt;NSAllowsArbitraryLoads&lt;/key&gt;
+    &lt;true/&gt;
+    &lt;key&gt;NSExceptionDomains&lt;/key&gt;
+    &lt;dict&gt;
+        &lt;key&gt;api.tutsplus.com&lt;/key&gt;
+        &lt;dict&gt;
+            &lt;key&gt;NSExceptionAllowsInsecureHTTPLoads&lt;/key&gt;
+            &lt;false/&gt;
+        &lt;/dict&gt;
+    &lt;/dict&gt;
+&lt;/dict&gt;
+</code></pre><p>【注：以上在Info.plist配置中的做法已经验证可行，但目前Apple的prerelease版本的官方文档并未提及Info.plist中配置的代码，我将密切关注官方文档，如有提及，再来更新本文 .你若发现官方文档有提及了，也可在微博@iOS程序犭袁通知下我。】（官方文档已经有阐述）</p>
+<p>Certificate Transparency</p>
+<p>虽然ATS大多数安全特性都是默认可用的，Certificate Transparency 是必须设置的。如果你有支持Certificate Transparency的证书，你可以检查NSRequiresCertificateTransparency关键字来使用Certificate Transparency。再次强调，如果你的证书不支持Certificate Transparency，此项需要设置为不可用。</p>
+<p>如果需要调试一些由于采用了ATS而产生的问题，需要设置CFNETWORK_DIAGNOSTICS为1，这样就会打印出包含被访问的URL和ATS错误在内的NSURLSession错误信息。要确保处理了遇到的所有的错误消息，这样才能使ATS易于提高可靠性和扩展性。</p>
+<p><strong>Q-A</strong></p>
+<p>Q：我用xcode7编译的app，如果不在plist里面加关键字说明，ios9下不能进行网络请求，因为我们服务器并不支持 TLS 1.2 ，我要是直接下载app store上的，什么也没有做，也是能正常网络请求。</p>
+<p>A：本文中所罗列的新特性，多数情况下指的是 iOS9.X-SDK 新特性，AppStore 的版本是基于 iOS8.X-SDK或 iOS7.X-SDK，所以并不受 iOS9新特性约束。也就是说：Xcode7给iOS8打设备包可以请求到网络，Xcode7给iOS9设备打的包请求不到网络，Xcode7和iOS9缺一不可，才需要网络适配ATS。</p>
+<p>那么，如何确认自己项目所使用的 SDK？在Targets-&gt;Build Setting–&gt;Architectures</p>
+<p>enter image description here</p>
+<p>Q：服务器已支持TLS 1.2 SSL ，但iOS9上还是不行，还要进行本文提出的适配操作。</p>
+<p>A：那是因为：要注意 App Transport Security 要求 TLS 1.2，而且它要求站点使用支持forward secrecy协议的密码。证书也要求是符合ATS规格的，ATS只信任知名CA颁发的证书，小公司所使用的 self signed certificate，还是会被ATS拦截。。因此慎重检查与你的应用交互的服务器是不是符合ATS的要求非常重要。对此，建议使用下文中给出的NSExceptionDomains，并将你们公司的域名挂在下面。</p>
+<p>官方文档 App Transport Security Technote 对CA颁发的证书要求：</p>
+<p>Certificates must be signed using a SHA256 or better signature hash algorithm, with either a 2048 bit or greater RSA key or a 256 bit or greater Elliptic-Curve (ECC) key. Invalid certificates result in a hard failure and no connection<br>Q：我使用的是第三方的网络框架，比如 AFNetworking 、ASIHTTPRequest、CFSocket 等，这个有影响没有？</p>
+<p>A： AFNetworking 有影响，其它没影响。</p>
+<p>ATS 是只针对 NSURLConnection 、 CFURL 、 NSURLSession ，如果底层涉及到这三个类就会有影响。</p>
+<p>现在的 AFNetworking 的 AFHTTPRequestOperationManager 实现是使用的 NSURLConnection 。</p>
+<p>但 AFNetworking 也有更新计划，移除 NSURLConnection 相关API，迁移到 AFHTTPSessionManager ，但还未执行，详情见：<a href="https://github.com/AFNetworking/AFNetworking/issues/2806。" target="_blank" rel="external">https://github.com/AFNetworking/AFNetworking/issues/2806。</a></p>
+<p>Q：试了一下禁用 ATS 的方法 但是还是无法联网 仍然提示要使用https?</p>
+<p>App Transport Security has blocked a cleartext HTTP (http://) resource load since it is insecure. Temporary exceptions can be configured via your app’s Info.plist file.</p>
+<p>The resource could not be loaded because the App Transport Security policy requires the use of a secure connection.<br>A：遇到这类问题，90%是出现在“一个 Project 多 Target ”的情况下，所以 请确保你修改的，确实是你的 Target 所属的 Info.plist ！</p>
+<p>如何确认？请前往这里，确认你 Target 所属的 Info.plist 究竟是哪个：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Project -&gt; Your Target -&gt; Build Settings -&gt; Info.plist File</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p> 或者更直截了当一点，直接修改：<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Project -&gt; Your Target —&gt;info－&gt; Custom iOS target properties－&gt; 添加禁用 ATS 的属性</div></pre></td></tr></table></figure></p>
+<p> 还有一种可能性是：禁用 ATS 的代码粘贴进 plist 时，位置不对，可以尝试放在 diwuhang</p>
+<p> Q：我的项目是“一个 Project 多 Target ”，按照本文禁用 ATS 的方法，是不是每个 Info.plist 都要修改？</p>
+<p> A：不需要，用到哪个 Target 修改哪个的 Info.plist ，Target 是独立的，不受其他 Target 的影响，也不会影响其他 Target。</p>
+<p> Q：如何检测我们公司 HTTPS 是否符合 ATS 的要求？</p>
+<p> A： 如果你的 App 的服务也在升级以适配ATS要求，可以使用如下的方式进行校验：</p>
+<p> 在OS X EI Capitan系统的终端中通过nscurl命令来诊断检查你的HTTPS服务配置是否满足Apple的ATS要求:<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ nscurl --verbose --ats-diagnostics https://&lt;your_server_domain&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="iOS9新特性-更灵活的后台定位"><a href="#iOS9新特性-更灵活的后台定位" class="headerlink" title="iOS9新特性_更灵活的后台定位"></a>iOS9新特性_更灵活的后台定位</h2><hr>
+<p> 如何偷偷在后台定位：请求后台定位权限：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"> // 1. 实例化定位管理器</div><div class="line">_locationManager = [[CLLocationManager alloc] init];</div><div class="line">// 2. 设置代理</div><div class="line">_locationManager.delegate = self;</div><div class="line">// 3. 定位精度</div><div class="line">[_locationManager setDesiredAccuracy:kCLLocationAccuracyBest];</div><div class="line">// 4.请求用户权限：分为：⓵只在前台开启定位⓶在后台也可定位，</div><div class="line">//注意：建议只请求⓵和⓶中的一个，如果两个权限都需要，只请求⓶即可，</div><div class="line">//⓵⓶这样的顺序，将导致bug：第一次启动程序后，系统将只请求⓵的权限，⓶的权限系统不会请求，只会在下一次启动应用时请求⓶</div><div class="line">if ([[[UIDevice currentDevice] systemVersion] floatValue] &gt;= 8) &#123;</div><div class="line">    //[_locationManager requestWhenInUseAuthorization];//⓵只在前台开启定位</div><div class="line">    [_locationManager requestAlwaysAuthorization];//⓶在后台也可定位</div><div class="line">&#125;</div><div class="line">// 5.iOS9新特性：将允许出现这种场景：同一app中多个location manager：一些只能在前台定位，另一些可在后台定位（并可随时禁止其后台定位）。</div><div class="line">if ([[[UIDevice currentDevice] systemVersion] floatValue] &gt;= 9) &#123;</div><div class="line">    _locationManager.allowsBackgroundLocationUpdates = YES;</div><div class="line">&#125;</div><div class="line">// 6. 更新用户位置</div><div class="line">[_locationManager startUpdatingLocation];</div></pre></td></tr></table></figure>
+<p> 但是如果照着这种方式尝试，而没有配置Info.plist，100%你的程序会崩溃掉，并报错：</p>
+<blockquote>
+<p>Assertion failure in -[CLLocationManager setAllowsBackgroundLocationUpdates:], /BuildRoot/Library/Caches/com.apple.xbs/Sources/CoreLocationFramework_Sim/CoreLocation-1808.1.5/Framework/CoreLocation/CLLocationManager.m:593</p>
+</blockquote>
+<p> 这个问题，有两种方式可以解决：</p>
+<p>  <strong>第一种</strong></p>
+<p> 对应的 Info.plist 的XML源码是：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;key&gt;NSLocationAlwaysUsageDescription&lt;/key&gt;</div><div class="line">&lt;string&gt;微博@iOS程序犭袁 请求后台定位权限&lt;/string&gt;</div><div class="line"></div><div class="line">&lt;key&gt;UIBackgroundModes&lt;/key&gt;</div><div class="line">&lt;array&gt;</div><div class="line">    &lt;string&gt;location&lt;/string&gt;</div><div class="line">&lt;/array&gt;</div></pre></td></tr></table></figure>
+<p> 第二种：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">在对应 target 的 Capabilities -&gt; Background Modes -&gt; 开启 Location Updates</div></pre></td></tr></table></figure>
+<h2 id="Bitcode"><a href="#Bitcode" class="headerlink" title="Bitcode"></a>Bitcode</h2><hr>
+<p> 【前言】未来， Watch 应用必须包含 bitcode ，iOS不强制，Mac OS不支持。 但最坑的一点是： Xcode7 及以上版本会默认开启 bitcode 。</p>
+<p> 什么是 bitcode ？</p>
+<p> 通俗解释：在线版安卓ART模式。</p>
+<p> Apple 官方文档– App Distribution Guide – App Thinning (iOS, watchOS) 是这样定义的：</p>
+<blockquote>
+<p>Bitcode is an intermediate representation of a compiled program. Apps you upload to iTunes Connect that contain bitcode will be compiled and linked on the App Store. Including bitcode will allow Apple to re-optimize your app binary in the future without the need to submit a new version of your app to the store.</p>
+</blockquote>
+<p> 翻译过来就是：</p>
+<blockquote>
+<p>bitcode 是被编译程序的一种中间形式的代码。包含 bitcode 配置的程序将会在 App Store 上被编译和链接。 bitcode 允许苹果在后期重新优化我们程序的二进制文件，而不需要我们重新提交一个新的版本到 App Store 上。<br> 在 Xcode简介— What’s New in Xcode-New Features in Xcode 7 中这样描述：</p>
+<p>Bitcode. When you archive for submission to the App Store, Xcode will compile your app into an intermediate representation. The App Store will then compile the bitcode down into the 64 or 32 bit executables as necessary.</p>
+</blockquote>
+<p> 也就是</p>
+<blockquote>
+<p>当我们提交程序到 App Store上时， Xcode 会将程序编译为一个中间表现形式( bitcode )。然后 App store 会再将这个 bitcode 编译为可执行的64位或32位程序。<br> 再看看这两段描述都是放在App Thinning(App瘦身)一节中，可以看出其与包的优化有关了。</p>
+</blockquote>
+<p> 打个比方，没有 bitcode 的 AppStore 里所提供的 App，类似在新华书店里卖捆绑销售的《四大名著丛书–精装版》，要买只能全买走，有了 bitcode 就好比这套四大名著每本都可以单卖，顾客就能按需购买。我们开发者在这个过程中扮演的角色是图书出版商的角色，应该照顾那些没钱一次买四本的顾客。（不要做不珍惜用户流量和存储空间的奸商。。）</p>
+<p> 那为什么第三方的 SDK 不支持 bitcode，我的 app 也就不能支持？打个比方，《四大名著丛书》只要有一本是可以单卖的，那么你很难再卖捆绑销售款的《四大名著丛书》了，所以干脆全都可以单卖，这大概就是 Apple 的逻辑。</p>
+<p> App Thinning 官方文档解释如下：</p>
+<blockquote>
+<p>The App Store and operating system optimize the installation of iOS and watchOS apps by tailoring app delivery to the capabilities of the user’s particular device, with minimal footprint. This optimization, called app thinning, lets you create apps that use the most device features, occupy minimum disk space, and accommodate future updates that can be applied by Apple. Faster downloads and more space for other apps and content provides a better user experience.</p>
+</blockquote>
+<p> 开发者都知道，当前 iOS App 的编译打包方式是把适配兼容多个设备的执行文件及资源文件合并一个文件，上传和下载的文件则包含了所有的这些文件，导致占用较多的存储空间。</p>
+<p> App Thinning是一个关于节省iOS设备存储空间的功能，它可以让iOS设备在安装、更新及运行App等场景中仅下载所需的资源，减少App的占用空间，从而节省设备的存储空间。</p>
+<p> 根据Apple官方文档的介绍，App Thinning主要有三个机制：</p>
+<ul>
+<li><p>Slicing</p>
+<p>开发者把App安装包上传到AppStore后，Apple服务会自动对安装包切割为不同的应用变体(App variant)，当用户下载安装包时，系统会根据设备型号下载安装对应的单个应用变体。</p>
+</li>
+<li><p>On-Demand Resources</p>
+<p>ORD(随需资源)是指开发者对资源添加标签上传后，系统会根据App运行的情况，动态下载并加载所需资源，而在存储空间不足时，自动删除这类资源。</p>
+<p>Bitcode 开启Bitcode编译后，可以使得开发者上传App时只需上传Intermediate Representation(中间件)，而非最终的可执行二进制文件。 在用户下载App之前，AppStore会自动编译中间件，产生设备所需的执行文件供用户下载安装。</p>
+<p>（喵大(@onevcat)在其博客 《开发者所需要知道的 iOS 9 SDK 新特性》 中也描述了iOS 9中苹果在App瘦身中所做的一些改进，大家可以转场到那去研读一下。）</p>
+<p>其中，Bitcode的机制可以支持动态的进行App Slicing，而对于Apple未来进行硬件升级的措施，此机制可以保证在开发者不重新发布版本的情况下而兼容新的设备。</p>
+<p>Bitcode 是一种中间代码，那它是什么格式的呢？ LLVM 官方文档有介绍这种文件的格式： LLVM Bitcode File Format 。</p>
+<p>如果你的应用也准备启用 Bitcode 编译机制，就需要注意以下几点：</p>
+<p>Xcode 7默认开启 Bitcode ，如果应用开启 Bitcode，那么其集成的其他第三方库也需要是 Bitcode 编译的包才能真正进行 Bitcode 编译<br>开启 Bitcode 编译后，编译产生的 .app 体积会变大(中间代码，不是用户下载的包)，且 .dSYM 文件不能用来崩溃日志的符号化(用户下载的包是 Apple 服务重新编译产生的，有产生新的符号文件)<br>通过 Archive 方式上传 AppStore 的包，可以在Xcode的Organizer工具中下载对应安装包的新的符号文件<br>如何适配？</p>
+<p>在上面的错误提示中，提到了如何处理我们遇到的问题：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">You must rebuild it with bitcode enabled (Xcode setting ENABLE_BITCODE), obtain an updated library from the vendor, or disable bitcode for this target. for architecture arm64</div></pre></td></tr></table></figure>
+<p>正如开头所说的：</p>
+<p>未来， Watch 应用必须包含 Bitcode ，iOS不强制，Mac OS不支持。 但最坑的一点是： Xcode7 及以上版本会默认开启 Bitcode 。<br>Xcode 7 + 会开启 Bitcode。</p>
+<p>也就是说，也两种方法适配：</p>
+<ul>
+<li>方法一：更新 library 使包含 Bitcode ，否则会出现以下中的警告；</li>
+</ul>
+<p>(null): URGENT: all bitcode will be dropped because ‘/Users/myname/Library/Mobile Documents/com~apple~CloudDocs/foldername/appname/GoogleMobileAds.framework/GoogleMobileAds(GADSlot+AdEvents.o)’ was built without bitcode. You must rebuild it with bitcode enabled (Xcode setting ENABLE_BITCODE), obtain an updated library from the vendor, or disable bitcode for this target. Note: This will be an error in the future.<br>甚至有的会报错误，无法通过编译：</p>
+<blockquote>
+<p>ld: ‘/Users//Framework/SDKs/PolymerPay/Library/mobStat/libSDK.a(**ForSDK.o)’ does not contain bitcode. You must rebuild it with bitcode enabled (Xcode setting ENABLE_BITCODE), obtain an updated library from the vendor, or disable bitcode for this target. for architecture arm64</p>
+</blockquote>
+<p>或：</p>
+<blockquote>
+<p>ld: -undefined and -bitcode_bundle (Xcode setting ENABLE_BITCODE =YES) cannot be used together clang: error: linker command failed with exit code 1 (use -v to see invocation)<br>enter image description here</p>
+</blockquote>
+<p>无论是警告还是错误，得到的信息是：我们引入的一个第三方库不包含bitcode。</p>
+<ul>
+<li>方法二：关闭Bitcode<br>我们可以在”Build Settings”-&gt;”Enable Bitcode”选项中看到：</li>
+</ul>
+<p>用 Xcode 7+ 新建一个 iOS 程序时， bitcode 选项默认是设置为YES的。现在需要改成NO。</p>
+<p>如果我们开启了 bitcode ，在提交包时，也会有个 bitcode 选项</p>
+<p>那么 SDK 厂商如何支持 bitcode 呢？答案是只要在 Xcode7上重新编译一下就 ok 了。（请确保默认开启的 bitcode 没有去主动关闭）</p>
+<p>但是如果仅仅是编译一下，则会出现下类似的如下警告：</p>
+</li>
+</ul>
+<blockquote>
+<p>ld: warning: full bitcode bundle could not be generated because ‘Lookback(Lookback.o)’ was built only with bitcode marker. The library must be generated from Xcode archive build with bitcode enabled (Xcode setting ENABLE_BITCODE)</p>
+</blockquote>
+<p> 警告的消除步骤：</p>
+<p> 模拟器、真机分开打包，SDK在build的时候，让模拟器与真机分开build，模拟器不设置bitcode的参数，真机的加上，然后再合起来。（“合起来”指的是指令集，好比 x86_64 i386 跟 armv7 arm64合起来。）用命令行打包的话 加上这个参数OTHER_CFLAGS=“-fembed-bitcode”。</p>
+<h4 id="PS-仅仅作为搬运工-更多详细的可以去-iOS9AdaptationTips"><a href="#PS-仅仅作为搬运工-更多详细的可以去-iOS9AdaptationTips" class="headerlink" title="PS : 仅仅作为搬运工, 更多详细的可以去 iOS9AdaptationTips"></a>PS : 仅仅作为搬运工, 更多详细的可以去 iOS9AdaptationTips</h4><p> <a href="https://github.com/ChenYilong/iOS9AdaptationTips" target="_blank" rel="external">https://github.com/ChenYilong/iOS9AdaptationTips</a></p>
+<p> 原文链接: <a href="http://blog.csdn.net/zhz459880251/article/details/48807719" target="_blank" rel="external">http://blog.csdn.net/zhz459880251/article/details/48807719</a></p>
+</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="zhzDeveloper.github.io/2015/09/29/iOS9 更新/" data-id="cj3uzbmeh002gxzhlzpbzp7cm" class="article-share-link">分享</a><div class="tags"></div><div class="post-nav"><a href="/2015/09/29/ios代码调整button图片image文字title位置/" class="pre">ios代码调整button图片image文字title位置</a><a href="/2015/09/29/每年WWDC的英文记录/" class="next">每年WWDC的英文记录</a></div></div></div></div><div class="pure-u-1 pure-u-md-1-4"><div id="sidebar"><div class="widget"><form action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank" class="search-form"><input type="search" name="word" maxlength="20" placeholder="Search"/><input type="hidden" name="si" value="zhzDeveloper.github.io"/><input name="tn" type="hidden" value="bds"/><input name="cl" type="hidden" value="3"/><input name="ct" type="hidden" value="2097152"/><input name="s" type="hidden" value="on"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS-分类/">iOS-分类</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios平台/">ios平台</a><span class="category-list-count">67</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios平台-UI控件/">ios平台,UI控件</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios平台-图片处理/">ios平台,图片处理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios平台-开发工具/">ios平台,开发工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/swift/">swift</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/开发工具/">开发工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/正则/">正则</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机技巧/">计算机技巧</a><span class="category-list-count">3</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/数据cache/">数据cache</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/Python 爬虫初探/">Python 爬虫初探</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/12/数组排序sortedArrayUsingComparator/">数组排序sortedArrayUsingComparator</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/13/macOS Sierra 找回消失的 “任何来源”/">macOS Sierra 找回消失的 “任何来源”</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/11/Method Swizzling(转载+补充)/">Method Swizzling(转载+补充)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/10/instancesRespondToSelector与respondsToSelector的区别/">instancesRespondToSelector与respondsToSelector的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/08/生成Description/">生成Description</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/26/忽略编译警告/">忽略编译警告</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/09/iOS-面试题整理/">iOS-面试题整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/07/GCD小结/">GCD小结</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2017 <a href="/." rel="nofollow">zhz blogs.</a> Powered by<a rel="nofollow" target="_blank" href="https://github.com/zhzDeveloper"> zhz.</a><a rel="nofollow" target="_blank" href="http://zhzdeveloper.github.io/"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/zhzDeveloper"> zhz.</a></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>

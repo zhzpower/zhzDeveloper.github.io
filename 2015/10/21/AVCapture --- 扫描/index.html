@@ -1,0 +1,80 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>AVCapture --- 扫描 | zhz blogs</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/6.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.2/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.2/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">AVCapture --- 扫描</h1><a id="logo" href="/.">zhz blogs</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">AVCapture --- 扫描</h1><div class="post-meta">Oct 21, 2015<span> | </span><span class="category"><a href="/categories/ios平台/">ios平台</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span></div><div class="post-content"><h1 id="用到的类-对象"><a href="#用到的类-对象" class="headerlink" title="用到的类/对象"></a>用到的类/对象</h1><hr>
+<table>
+<thead>
+<tr>
+<th>序列</th>
+<th>对象</th>
+<th>代表意思</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> a</td>
+<td>AVCaptureDevice</td>
+<td>抽象的硬件设备</td>
+</tr>
+<tr>
+<td> b</td>
+<td>AVCaptureInput</td>
+<td>输入设备(可以是它的子类), 它配置抽象设备的ports</td>
+</tr>
+<tr>
+<td> c</td>
+<td>AVCaptureOutput</td>
+<td>输出数据, 管理着输出到一个movie或者图像</td>
+</tr>
+<tr>
+<td> d</td>
+<td>AVCaptureSession</td>
+<td>input 和 output的桥梁, 它协调着input到output得数据传输</td>
+</tr>
+</tbody>
+</table>
+<h1 id="相互关系"><a href="#相互关系" class="headerlink" title="相互关系"></a>相互关系</h1><hr>
+<ul>
+<li><p>高层关系:<br>有很多Device的input, 也有很多类型的Output, 都通过一个Capture Session来控制进行传输. 也即：CaptureDevice适配AVCaptureInput，通过Session来输入到AVCaptureOutput中。这样也就达到了从设备到文件等持久化传输的目的（如从相机设备采集图像到UIImage中）。</p>
+<p>特别注意:  这里的关系是可以通过唯一一个Capture Session来同时控制设备的输入和输出。</p>
+<p>那么存在一个问题了：视频输入(input)就对应视频的输出(output)，而音频输入就应对应音频的输出，因而需要建立对应的Connections，来各自连接它们。而这样的连接对象，是由<code>AVCaptureSession</code>来持有的，这个对象叫<code>AVCaptureConnection</code>。</p>
+<p>在一个<code>AVCaptureConnection</code>中，这里维持着对应的数据传输输入到数据输出的过程（detail过程）。这里，<code>AVCaptureInput</code>或其子类对象包含着各种input port，通过各种input port，我们的<code>AVCaptureOutput</code>可以获取到相应的数据。</p>
+<p>一个<code>AVCaptureConnection</code>可以控制input到output的数据传输。</p>
+</li>
+</ul>
+<h1 id="Session及其使用模式"><a href="#Session及其使用模式" class="headerlink" title="Session及其使用模式"></a>Session及其使用模式</h1><hr>
+<blockquote>
+<p>You use an instance to coordinate the flow of data from AV input devices to outputs. <strong>You add the capture devices and outputs you want to the session</strong>, then start data flow by sending the session a startRunning message, and stop recording by sending a stopRunning message.<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">AVCaptureSession *session = [[AVCaptureSession alloc] init];</div><div class="line"></div><div class="line">//Add inputs and outputs.</div><div class="line">[session startRunning];</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p> 这里表明了，需要create一个session，然后发running消息给它，它会自动跑起来，把输入设备的东西，提交到输出设备中。</p>
+<ul>
+<li>若想在一个已经使用上的session中（已经startRunning了）做更换新的device、删除旧的device等一系列操作，那么就需要使用如下方法：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">[session beginConfiguration];</div><div class="line"></div><div class="line">// Remove an existing capture device.</div><div class="line"></div><div class="line">// Add a new capture device.</div><div class="line"></div><div class="line">// Reset the preset.</div><div class="line"></div><div class="line">[session commitConfiguration];</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p> 来进行处理。</p>
+<ul>
+<li>当然，如果session的时候发生了异常，那么我们可以通过<code>notification</code>去observe相关的事件（可以在AVCaptureSession Class Reference中的Nofications中找到相应的情况），而session如果出现相应问题时，它会post出来，此时我们就可以处理了。</li>
+</ul>
+<h1 id="谈谈AVCaptureDevice"><a href="#谈谈AVCaptureDevice" class="headerlink" title="谈谈AVCaptureDevice"></a>谈谈AVCaptureDevice</h1><hr>
+<p> <code>InputDevice</code>即是对硬件的抽象，一对一的。一个<code>AVCaptureDevice</code>对象，对应一个实际的硬件设备。</p>
+<p> 那么显然，我们可以通过<code>AVCaptureDevice</code>的类方法<code>devices</code>或<code>devicesWithMediaType</code>去获取全部或局部设备列表。（当然也可以检测相应的设备是否可以使用，这里注意有设备抢占问题，当前是否可用）</p>
+<ul>
+<li>相机设备可以用下面的方法判断设备是否支持相关属性(property)，比如对焦方式或者对焦状态Focus modes。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">if([currentDevice  isFocusModeSupported:AVCaptureFocusModeContinuousAutoFocus])</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p> 此外，设置对焦点CGPoint时，需要注意位置：</p>
+<blockquote>
+<p>a CGPoint where {0,0} represents the top left of the picture area, and {1,1} represents the bottom right in landscape mode with the home button on the right。</p>
+</blockquote>
+<ul>
+<li>当我们需要对一个设备的属性进行观察，我们可以使用KVO来处理。（为啥观察，比如我们需要知道设备此时是否正在对焦or已经停止了对焦）<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">  lockàsetàunlock</div><div class="line"></div><div class="line">if([device isFocusModeSupported:AVCaptureFocusModeLocked])</div><div class="line"></div><div class="line">//do configuring</div><div class="line"></div><div class="line">[device unlockForConfiguration];</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">else&#123;//Respond to the failure as appropriate.</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="CaptureInput的构建和添加到Session中的方法"><a href="#CaptureInput的构建和添加到Session中的方法" class="headerlink" title="CaptureInput的构建和添加到Session中的方法"></a>CaptureInput的构建和添加到Session中的方法</h1><hr>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">/*创建并配置输入设备*/</div><div class="line"></div><div class="line">AVCaptureDevice *device =</div><div class="line"></div><div class="line">        [AVCaptureDevice   defaultDeviceWithMediaType:AVMediaTypeVideo];</div><div class="line"></div><div class="line">NSError  *error = nil;</div><div class="line"></div><div class="line">AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:device error:&amp;error];</div><div class="line"></div><div class="line">//添加input到session的模式是(检查可否添加到session，然后根据情况添加或者不添加)：</div><div class="line"></div><div class="line">AVCaptureSession *captureSession = &lt;#Get a capture session#&gt;;</div><div class="line"></div><div class="line">if ([captureSession canAddInput:input]) &#123;</div><div class="line"></div><div class="line">[captureSession   addInput:captureDeviceInput];</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">else&#123;//handle the failure.&#125;</div></pre></td></tr></table></figure>
+<h1 id="output的分类和使用"><a href="#output的分类和使用" class="headerlink" title="output的分类和使用"></a>output的分类和使用</h1><hr>
+<p> 在ios中，分为<code>MovieFile</code>、<code>VideoData</code>、<code>AudioData</code>和<code>StillImage</code>几种output，使用方式类似，只是范围不同。另外，它们都继承于<code>AVCaptureOutput</code>。</p>
+<p> 第一个是输出成movie文件，第二个适用于逐个Frame的处理，第三个适用于声音采集，第四个是still image(静态图像&lt;拍照&gt;)相关。</p>
+<p> 他们的添加方式都是使用session的addOutput方法。</p>
+<h1 id="最后提一下"><a href="#最后提一下" class="headerlink" title="最后提一下"></a>最后提一下</h1><hr>
+<p> 值得一看的Demo：AVCam。可以在xcode中找到。</p>
+<p> 文章载自: <a href="http://blog.163.com/chester_lp/blog/static/139794082012119112834437/" target="_blank" rel="external">ios编程–AVCapture编程理解</a></p>
+<p> 原文链接: <a href="http://blog.csdn.net/zhz459880251/article/details/49307819" target="_blank" rel="external">http://blog.csdn.net/zhz459880251/article/details/49307819</a></p>
+</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="zhzDeveloper.github.io/2015/10/21/AVCapture --- 扫描/" data-id="cj3uzbmct0000xzhl530ep72e" class="article-share-link">分享</a><div class="tags"></div><div class="post-nav"><a href="/2015/10/21/下拉菜单/" class="pre">下拉菜单</a><a href="/2015/10/21/截图 iOS/" class="next">截图 iOS</a></div></div></div></div><div class="pure-u-1 pure-u-md-1-4"><div id="sidebar"><div class="widget"><form action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank" class="search-form"><input type="search" name="word" maxlength="20" placeholder="Search"/><input type="hidden" name="si" value="zhzDeveloper.github.io"/><input name="tn" type="hidden" value="bds"/><input name="cl" type="hidden" value="3"/><input name="ct" type="hidden" value="2097152"/><input name="s" type="hidden" value="on"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS-分类/">iOS-分类</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios平台/">ios平台</a><span class="category-list-count">67</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios平台-UI控件/">ios平台,UI控件</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios平台-图片处理/">ios平台,图片处理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios平台-开发工具/">ios平台,开发工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/swift/">swift</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/开发工具/">开发工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/正则/">正则</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机技巧/">计算机技巧</a><span class="category-list-count">3</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/数据cache/">数据cache</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/Python 爬虫初探/">Python 爬虫初探</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/12/数组排序sortedArrayUsingComparator/">数组排序sortedArrayUsingComparator</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/13/macOS Sierra 找回消失的 “任何来源”/">macOS Sierra 找回消失的 “任何来源”</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/11/Method Swizzling(转载+补充)/">Method Swizzling(转载+补充)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/10/instancesRespondToSelector与respondsToSelector的区别/">instancesRespondToSelector与respondsToSelector的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/08/生成Description/">生成Description</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/26/忽略编译警告/">忽略编译警告</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/09/iOS-面试题整理/">iOS-面试题整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/07/GCD小结/">GCD小结</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2017 <a href="/." rel="nofollow">zhz blogs.</a> Powered by<a rel="nofollow" target="_blank" href="https://github.com/zhzDeveloper"> zhz.</a><a rel="nofollow" target="_blank" href="http://zhzdeveloper.github.io/"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/zhzDeveloper"> zhz.</a></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>

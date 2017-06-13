@@ -1,0 +1,1336 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>结合正则 抓取的iOS 第三方 | zhz blogs</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/6.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.2/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.2/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">结合正则 抓取的iOS 第三方</h1><a id="logo" href="/.">zhz blogs</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">结合正则 抓取的iOS 第三方</h1><div class="post-meta">Dec 7, 2015<span> | </span><span class="category"><a href="/categories/ios平台/">ios平台</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span></div><div class="post-content"><p> +++++<a href="#hehe"><big><b>抓取方法在后面</b></big></a>+++++</p>
+<table>
+<thead>
+<tr>
+<th>第三方</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> <a href="https://github.com/enormego/EGOTableViewPullRefresh" target="_blank" rel="external">EGOTableViewPullRefresh</a></td>
+<td><big> 最早的下拉刷新控件。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/samvermette/SVPullToRefresh" target="_blank" rel="external">SVPullToRefresh</a></td>
+<td><big> 下拉刷新控件。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/xhzengAIB/XHRefreshControl" target="_blank" rel="external">XHRefreshControl</a></td>
+<td><big> XHRefreshControl 是一款高扩展性、低耦合度的下拉刷新、上提加载更多的组件。（国人写）</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/coolbeet/CBStoreHouseRefreshControl" target="_blank" rel="external">CBStoreHouseRefreshControl</a></td>
+<td><big> 一个效果很酷炫的下拉刷新控件。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/dasdom/BreakOutToRefresh" target="_blank" rel="external">BreakOutToRefresh</a></td>
+<td><big> 一个下拉刷新打砖块的开源 Swift 库，能让用户在等待下拉刷新的时候边玩撞球游戏边等待。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/KittenYang/KYJellyPullToRefresh" target="_blank" rel="external">KYJellyPullToRefresh</a></td>
+<td><big> 实现弹性物理效果的下拉刷新，神奇的贝塞尔曲线，配合UIDynamic写的一个拟物的下拉刷新动画。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/gsdios/SDRefreshView" target="_blank" rel="external">SDRefreshView</a></td>
+<td><big> 简单易用的上拉和下拉刷新（多版本细节适配）。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/MakeZL/ZLSwiftRefresh" target="_blank" rel="external">ZLSwiftRefresh</a></td>
+<td><big> swift下拉刷新/上拉加载更多，支持自定义动画，集成简单，兼容UITableView/CollectionView/ScrollView/WebView。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/dasdom/BreakOutToRefresh" target="_blank" rel="external">BreakOutToRefresh</a></td>
+<td><big> swift，上拉和下拉刷新。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/andreamazz/GearRefreshControl" target="_blank" rel="external">GearRefreshControl</a></td>
+<td><big> swift，上拉和下拉刷新。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/jcavar/refresher" target="_blank" rel="external">refresher</a></td>
+<td><big> swift，上拉和下拉刷新。</big></td>
+</tr>
+<tr>
+<td> <a href="http://d.cocoachina.com/code/detail/237753" target="_blank" rel="external">可展开/收缩的下拉菜单–SvpplyTable</a></td>
+<td><big> 一个可展开可收缩的下拉菜单，类&#20284;Svpply app。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/Yalantis/PullToMakeSoup" target="_blank" rel="external">PullToMakeSoup</a></td>
+<td><big> PullToMakeSoup, 自定义下拉刷新的动画效果：煮饭, Yalantis新作！</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/cyndibaby905/TwitterCover" target="_blank" rel="external">TwitterCover</a></td>
+<td><big> Twitter iOS客户端的下拉封面模糊效果。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/MartinRGB/Replace-iOS" target="_blank" rel="external">Replace-iOS</a></td>
+<td><big> Replace-iOS 让人&#30524;前一亮的下拉刷新（iOS）。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/KittenYang/Animations" target="_blank" rel="external">Animations</a></td>
+<td><big> 封装了一下，使用的时候只要两行代码。一些动画的飞机稿，都是一些单独分离出来的用于测试的子动画，现在统一归类一下。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/nicklockwood/FXBlurView" target="_blank" rel="external">FXBlurView</a></td>
+<td><big>be 支持iOS5.0以上版本，支持静态、动态模糊效果，继承与UIView的模糊特效。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/onevcat/VVBlurPresentation" target="_blank" rel="external">VVBlurPresentation</a></td>
+<td><big>很简单易用的在原来viewconntroller基础上做模糊，然后present新的viewcontroller的。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/smileyborg/PureLayout" target="_blank" rel="external">PureLayout</a></td>
+<td><big></big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/robb/Cartography" target="_blank" rel="external">Cartography</a></td>
+<td><big></big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/honcheng/RTLabel" target="_blank" rel="external">RTLabel</a></td>
+<td><big> 富文本。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/bingxue314159/RTLabel" target="_blank" rel="external">RTLabel</a></td>
+<td><big> 富文本，RTLabel支持64位。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/TinyQ/TQRichTextView" target="_blank" rel="external">TQRichTextView</a></td>
+<td><big> 用于做富文本视图控件显示，用于即时通讯的表情显示，以及资源评论的富文本显示。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/TigerWf/WFReader" target="_blank" rel="external">WFReader</a></td>
+<td><big> 一款简单的coretext阅读器，支持文本选择、高亮以及字体大小选择等。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/mrchenhao/HHFlashSwitch" target="_blank" rel="external">HHFlashSwitch</a></td>
+<td><big> 一个另类的UISwitch，选择后，背景水波扩散变色效果。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/zhangyu9050/UUColorSwitch" target="_blank" rel="external">UUColorSwitch</a></td>
+<td><big> Switch 开关动画效果,当打开开关时，Switch可实现平滑渲染过渡到父视图的效果。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/facebook/Shimmer" target="_blank" rel="external">Shimmer</a></td>
+<td><big> BlingBling闪光效果，酷炫的Label的效果，可以用于加载等待提示。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/nnhubbard/ZSSRichTextEditor" target="_blank" rel="external">ZSSRichTextEditor</a></td>
+<td><big> 适用于iOS的富文本WYSIWYG编辑器，支持语法高亮和源码查看。ZSSRichTextEditor包含所有WYSIWYG标准的编辑器工具。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/cloverstudio/CSGrowingTextView" target="_blank" rel="external">CSGrowingTextView</a></td>
+<td><big> 用作即时通讯文本框和评论文本框使用，可以显示多行输入。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/indragiek/MarkdownTextView" target="_blank" rel="external">MarkdownTextView</a></td>
+<td><big> 显示Markdown的TextView。</big></td>
+</tr>
+<tr>
+<td> <a href="http://d.cocoachina.com/code/detail/300299" target="_blank" rel="external">高仿微信限定行数文字内容</a></td>
+<td><big> 采用Autolayout高仿微信纯文字限定行数。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/lingochamp/FuriganaTextView" target="_blank" rel="external">FuriganaTextView</a></td>
+<td><big> 实现复杂的日文韩文排版。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/gmertk/ParkedTextField" target="_blank" rel="external">ParkedTextField</a></td>
+<td><big> 带固定文本的输入组件。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/lexrus/LTMorphingLabel" target="_blank" rel="external">LTMorphingLabel</a></td>
+<td><big> swift 能够实现文字变形动画效果的Label，用Swift写的一个能够实现文字变形动画效果的Label，很炫。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/zyprosoft/GJCFCoreText" target="_blank" rel="external">GJCFCoreText</a></td>
+<td><big> 图文混排。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/KyoheiG3/AttributedLabel" target="_blank" rel="external">AttributedLabel</a></td>
+<td><big> 显示性能数量级 UILabel 的 AttributedLabel。无畏无惧、挑战权威。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/liufan321/FFLabel" target="_blank" rel="external">FFLabel</a></td>
+<td><big> 自动检测 URLs, @username, #topic# 等关链词（提供响应扩展）。实用的标签文本小组件。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/kevinzhow/PNChart" target="_blank" rel="external">PNChart</a></td>
+<td><big> 国内开源作者，动态的图表。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/zemirco/swift-linechart" target="_blank" rel="external">swift-linechart</a></td>
+<td><big> 功能完整、实用的折线图组件。使用方便，参数配置简单。是不可多得的优质组件–swift。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/xhacker/TEAChart" target="_blank" rel="external">TEAChart</a></td>
+<td><big> xhacker/TEAChart 一个简洁的 iOS 图表库，支持柱状图、饼图以及日历等。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/yasuoza/YOChartImageKit" target="_blank" rel="external">YOChartImageKit</a></td>
+<td><big> 支持在watchOS上绘制图表，看它最近更新挺勤快的，可以关注一下。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/onevcat/SWTableViewCell" target="_blank" rel="external">SWTableViewCell</a></td>
+<td><big> 国内开源作者，带很多手势的表单元&#26684;。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/alikaragoz/MCSwipeTableViewCell" target="_blank" rel="external">MCSwipeTableViewCell</a></td>
+<td><big> 带很多手势的表单元&#26684;。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/1000Memories/TMQuiltView" target="_blank" rel="external">TMQuiltView</a></td>
+<td><big> 瀑布流。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/lengmolehongyan/WaterfallFlowDemo" target="_blank" rel="external">WaterfallFlowDemo</a></td>
+<td><big> 一个简单的UICollectionView瀑布流布局演示demo。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/xmartlabs/XLForm" target="_blank" rel="external">XLForm</a></td>
+<td><big> 很多表&#26684;类的table,写法更高冷一点，推荐使用。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/shiyuan17/SYJiugonggeTableView" target="_blank" rel="external">SYJiugonggeTableView</a></td>
+<td><big> tableView封装的九宫&#26684;。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/acani/Chats" target="_blank" rel="external">Chats</a></td>
+<td><big> 聊天 UI 示例程序。此项目应该只为演示或学习之用，没有服务器 — swift。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/ming1016/PagerTab" target="_blank" rel="external">PagerTab</a></td>
+<td><big> UIScrollView实现滑动转换页面，类&#20284;网易云音乐iOS版的页面滑动切换效果。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/guilhermearaujo/GUITabPagerViewController" target="_blank" rel="external">GUITabPagerViewController</a></td>
+<td><big> 多个tab滑动切换。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/pozi119/VOMetroLayoutDemo" target="_blank" rel="external">VOMetroLayoutDemo</a></td>
+<td><big> Metro风&#26684;的UICollectionView, 目前只支持横向布局,仅在iPad上应用。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/KittenYang/KYCellAnimation" target="_blank" rel="external">KYCellAnimation</a></td>
+<td><big> 给UITableViewCell增加进入的动画。</big></td>
+</tr>
+<tr>
+<td> <a href="http://d.cocoachina.com/code/detail/298409" target="_blank" rel="external">横向展示文本内容的自定义cell</a></td>
+<td><big> 可以横向展示文本内容的自定义cell，根据文本无限滚动。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/jozsef-vesza/ExpandingStackCells" target="_blank" rel="external">ExpandingStackCells</a></td>
+<td><big> 采用 UIStackView 实现表&#26684;单元&#26684;扩展内容显示示例及解决方案。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/nghialv/Sapporo" target="_blank" rel="external">Sapporo</a></td>
+<td><big> swift 单元&#26684;模型驱动的集合视图管理器组件。又一个超实用的“轮子”。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/JazysYu/JZNavigationExtension" target="_blank" rel="external">JZNavigationExtension</a></td>
+<td><big> 多功能导航控制器，可以透明返回栏。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/okla/QuickRearrangeTableView" target="_blank" rel="external">QuickRearrangeTableView</a></td>
+<td><big> 基于 UITableView 的快速重排功能扩展子类。通过长按选定单元&#26684;然后滚动移动到指定位置。</big></td>
+</tr>
+<tr>
+<td> <a href="http://d.cocoachina.com/code/detail/286102" target="_blank" rel="external">SlideTapBar</a></td>
+<td><big> 滚动栏菜单，向上滚动时隐藏tabbar，向下滚动马上显示tabbar。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/Yalantis/FoldingTabBar.iOS" target="_blank" rel="external">FoldingTabBar.iOS</a></td>
+<td><big> 可折叠Tab Bar和Tab Bar Controller。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/ltebean/LTNavigationBar" target="_blank" rel="external">LTNavigationBar</a></td>
+<td><big> LTNavigationBar为app导航栏添加动态着色效果，可自定义其背景色。Demo包含：1.变换背景色；2.滚动视图，导航栏和状态栏重叠。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/bryankeller/BLKFlexibleHeightBar" target="_blank" rel="external">BLKFlexibleHeightBar</a></td>
+<td><big> 固定Header的效果库。。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/jdg/MBProgressHUD" target="_blank" rel="external">MBProgressHUD</a></td>
+<td><big> 最多人用的loading。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/TransitApp/SVProgressHUD" target="_blank" rel="external">SVProgressHUD</a></td>
+<td><big> SVProgressHUD的loading，如果你需要定制化的等待提示器，这个就是了（也许是最好的）。。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/relatedcode/ProgressHUD" target="_blank" rel="external">ProgressHUD</a></td>
+<td><big> ProgressHUD的loading，使用最简单。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/devSC/WSProgressHUD" target="_blank" rel="external">WSProgressHUD</a></td>
+<td><big> 一个小巧精致的HUD,支持添加到自定义View上, 还有更多小细节.。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/m1entus/WCAlertView" target="_blank" rel="external">WCAlertView</a></td>
+<td><big> 自定义的对话框。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/wimagguc/ios-custom-alertview" target="_blank" rel="external">IOS7AlertView</a></td>
+<td><big> IOS7AlertView的对话框。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/mtonio91/AMSmoothAlert" target="_blank" rel="external">AMSmoothAlert</a></td>
+<td><big> 动画效果不错，最多star，但不支持arm64。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/dinhquan/DQAlertView" target="_blank" rel="external">DQAlertView</a></td>
+<td><big> 扁平化的样式不错。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/mrchenhao/HHAlertView" target="_blank" rel="external">HHAlertView</a></td>
+<td><big> 一个简易的alertview 有三种样式，有成功，失败，和警告三种样式，支持Delegate和block两种回调。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/teodorpatras/EasyTipView" target="_blank" rel="external">EasyTipView</a></td>
+<td><big> 弹出提示框类及演示示例。同样地，API 简单、易用。好“轮子”，弹窗。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/kolyvan/kxmenu" target="_blank" rel="external">kxmenu</a></td>
+<td><big> kxmenu弹出菜单，点击视图上任意位置的按钮，会弹出一个菜单，并且有个小箭头指向点击的按钮，类&#20284;气泡视图。弹出的菜单位置会根据按钮的位置来进行调整。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/questbeat/QBPopupMenu" target="_blank" rel="external">QBPopupMenu</a></td>
+<td><big> QBPopupMenu弹出菜单，实现类&#20284; UIMenuItem 的弹出菜单按钮。点击按钮，会弹出一个菜单，上面可以排列多个按钮。纯代码实现，不需要任何图片。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/zhenlintie/STModalDemo" target="_blank" rel="external">STModalDemo</a></td>
+<td><big> 弹出视图（通知，提示，选择，窗口）。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/TaimurAyaz/TAOverlay" target="_blank" rel="external">TAOverlay</a></td>
+<td><big> TAOverlay可通过叠加层展示有用的信息，可自定义文本和背景色，添加阴影和模糊效果，以及更改字体大小或者用自定义图片替换页面上的icon。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/mayuur/MJAlertView" target="_blank" rel="external">MJAlertView</a></td>
+<td><big> 3D效果转场效果警示图–MJAlertView。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/morizotter/SwiftyDrop" target="_blank" rel="external">SwiftyDrop</a></td>
+<td><big> 轻量、易用的小清新弹出列表及信息提示组件真心不错。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/levey/AwesomeMenu" target="_blank" rel="external">AwesomeMenu</a></td>
+<td><big> 最多人用的Path菜单。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/Tangdixi/DCPathButton" target="_blank" rel="external">DCPathButton</a></td>
+<td><big> Path，4.0的弹出菜单，呼出或者关闭菜单时，多个小图标会分别按照逆时针和顺时针的方向进行滚动。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/itouch2/SphereMenu" target="_blank" rel="external">SphereMenu</a></td>
+<td><big> 利用UIDynamicAnimator的有趣的菜单，path类&#20284;。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/KittenYang/KYGooeyMenu" target="_blank" rel="external">KYGooeyMenu</a></td>
+<td><big> KYGooeyMenu 是一个具有 Gooey Effects 带粘性的扇形菜单控件(卫星菜单、path)。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/xhzengAIB/TwitterPaggingViewer" target="_blank" rel="external">TwitterPaggingViewer</a></td>
+<td><big> 多个Tableview，左右滑动。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/kaandedeoglu/KDCircularProgress" target="_blank" rel="external">KDCircularProgress</a></td>
+<td><big> KDCircularProgress是使用swift制作的色彩炫丽的进度条，可以加入多种颜色来控制进度条的渐变效果。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/xmartlabs/XLPagerTabStrip" target="_blank" rel="external">XLPagerTabStrip</a></td>
+<td><big> 做的很棒的iOS下的PagerTabStrip。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/onevcat/RandomColorSwift" target="_blank" rel="external">RandomColorSwift</a></td>
+<td><big> 一个自动生成好看的颜色的 Swift 库，RandomColorSwift。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/ChangweiZhang/HexColorService" target="_blank" rel="external">HexColorService</a></td>
+<td><big> 将16进制颜色字符串转成UIColor。</big></td>
+</tr>
+<tr>
+<td> <a href="http://d.cocoachina.com/code/detail/285611" target="_blank" rel="external">iOS Material Design库</a></td>
+<td><big> 该项目借鉴于谷歌的Material Design guideline，用户可自定义背景色。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/gsdios/SDProgressView" target="_blank" rel="external">SDProgressView</a></td>
+<td><big> 简便美观的进度指示器，此系列共有六种样式的进度指示器。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/SatanWoo/WZFlashButton" target="_blank" rel="external">WZFlashButton</a></td>
+<td><big> WZFlashButton，点击后button里面出现水波扩散效果。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/piemonte/Twinkle" target="_blank" rel="external">Twinkle</a></td>
+<td><big> 为字体加上钻石版闪耀的效果。使用Swift编写。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/palmin/ios-multi-back-button" target="_blank" rel="external">ios-multi-back-button</a></td>
+<td><big> 可替换内置的UInavigationController返回按钮，长按左上角的返回按钮，实现多层级的快速返回。</big></td>
+</tr>
+<tr>
+<td> <a href="http://code.cocoachina.com/detail/226543" target="_blank" rel="external">ASDayPicker</a></td>
+<td><big> 适用于iOS (iPhone)的日期选择器，类&#20284;于Calendar app的周视图。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/f33chobits/FSCalendar" target="_blank" rel="external">FSCalendar</a></td>
+<td><big> 日历视图，带有微妙和平滑的滚动效果，可自定义外观–国人。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/EmilYo/HSDatePickerViewController" target="_blank" rel="external">HSDatePickerViewController</a></td>
+<td><big> 带有Dropbox Mailbox感觉的时间日期选择器。启动是背景被模糊化。界面也是主流的扁平化风&#26684;。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/Yalantis/Persei" target="_blank" rel="external">Persei</a></td>
+<td><big> 动画隐藏或显示顶部菜单支持库及示例项目。–swift</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/hyperoslo/Form" target="_blank" rel="external">Form</a></td>
+<td><big> JSON 驱动的 Form表单系统，复杂的表单填写类 App 极其需要（比如淘宝呢！）。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/neoneye/SwiftyFORM" target="_blank" rel="external">SwiftyFORM</a></td>
+<td><big> swift 表单输入框架（亮点是表单验证规则引擎），是我见过地最易用的 Swift 表单组件。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/icanzilb/SwiftSpinner" target="_blank" rel="external">SwiftSpinner</a></td>
+<td><big> SwiftSpinner是使用swift制作的一款精致带感的指示器，并且连带有字体信息显示，模糊背景，半透明，扁平化等IOS8的效果。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/Akkyie/AKPickerView-Swift" target="_blank" rel="external">AKPickerView-Swift</a></td>
+<td><big> 一款小而美的 3D 效果选择器。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/larcus94/ImagePickerSheet" target="_blank" rel="external">ImagePickerSheet</a></td>
+<td><big> 图片或视频选择器（可多选）组件及其示例项目。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/cwRichardKim/RKNotificationHub" target="_blank" rel="external">RKNotificationHub</a></td>
+<td><big> 快速给 UIView 添加上炫酷的通知图标（Badge、红点、提示）。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/andreamazz/BubbleTransition" target="_blank" rel="external">BubbleTransition</a></td>
+<td><big> 以气泡膨胀和缩小的动画效果来显示和移除 controller，Uber的就是这种取消操作的方式。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/KittenYang/KYFloatingBubble" target="_blank" rel="external">KYFloatingBubble</a></td>
+<td><big> 类&#20284;iOS7中Game Center浮动气泡的效果。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/Draveness/DKNightVersion" target="_blank" rel="external">DKNightVersion</a></td>
+<td><big> DKNightVersion 是一个支持夜间模式切换的框架。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/sx1989827/EasyUIControl" target="_blank" rel="external">EasyUIControl</a></td>
+<td><big> 一个可以简化界面ui的控件框架。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/ZhongTaoTian/QQBtn" target="_blank" rel="external">QQBtn</a></td>
+<td><big> 仿QQ未读消息弹性按钮动画，达到和手机QQ未读信息一样的动画效果，效果基本实现。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/gmertk/GMStepper" target="_blank" rel="external">GMStepper</a></td>
+<td><big> swift 带动画效果、支持手势滑动操作的步进标签。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/441088327/LayoutTrait" target="_blank" rel="external">LayoutTrait</a></td>
+<td><big> swift 一个小类库。 做iPad 多任务分屏 适配的同学可以看一下。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/HAHAKea/HACursor" target="_blank" rel="external">HACursor</a></td>
+<td><big> HACursor，是一个对横向ScrollView中的视图进行管理的UI控件。只要几行代码就可以集成类&#20284;于网易新闻对主题页面进行排序，删除操作的功能。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/nixzhu/Ruler" target="_blank" rel="external">Ruler</a></td>
+<td><big> 尺子。</big></td>
+</tr>
+<tr>
+<td> <a href="http://www.starming.com/index.php?v=index&amp;view=62" target="_blank" rel="external">Core Animation笔记，基本的使用方法</a></td>
+<td><big> Core Animation笔记，基本的使用方法：1.基本动画，2.多步动画，3.沿路径的动画，4.时间函数，5.动画组。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/singro/SCNavigation" target="_blank" rel="external">SCNavigation</a></td>
+<td><big> UINavigation可以右滑返回，隐藏UINavigationBar。</big></td>
+</tr>
+<tr>
+<td> <a href="(null">ECSlidingViewController</a>)</td>
+<td><big> 侧滑菜单。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/gotosleep/JASidePanels" target="_blank" rel="external">JASidePanels</a></td>
+<td><big> 侧滑菜单,有左右菜单，有pop功能，支持手势侧滑,本人使用中：简单。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/Ramotion/animated-tab-bar" target="_blank" rel="external">animated-tab-bar</a></td>
+<td><big> 让 Tabbar items能显示萌萌的动画。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/romaonthego/RESideMenu" target="_blank" rel="external">RESideMenu</a></td>
+<td><big> 侧开菜单，qq类&#20284;。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/Jiahai/JHMenuTableViewDemo" target="_blank" rel="external">JHMenuTableViewDemo</a></td>
+<td><big> 仿网易邮箱列表侧滑菜单。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/xudafeng/SlideMenuView" target="_blank" rel="external">SlideMenuView</a></td>
+<td><big> 炫酷侧滑菜单布局框架，Android版本的一致实现。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/shinept/QQConfiguration" target="_blank" rel="external">QQConfiguration</a></td>
+<td><big> swift，QQ-iPhone端框架，左侧菜单栏拖动手势。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/jhurray/JHChainableAnimations" target="_blank" rel="external">JHChainableAnimations</a></td>
+<td><big> 在应用中采用链式写出酷炫的动画效果, 使代码更加清晰易读，利用block实现的链式编程。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/WXGBridgeQ/WXGSlideMenuDemo" target="_blank" rel="external">WXGSlideMenuDemo</a></td>
+<td><big> 个简单实现侧拉（侧滑）菜单的小demo，供初学者共同学习、练习使用。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/pkluz/PKRevealController" target="_blank" rel="external">PKRevealController</a></td>
+<td><big> PKRevealController是一个可以滑动的侧边栏菜单（可向左、向右或者同时向两侧），只需手指轻轻一点（或者按一下按钮，但是这样滑动时不够炫酷）。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/GabrielAlva/SwiftPages" target="_blank" rel="external">SwiftPages</a></td>
+<td><big> 高可定制类&#20284; Instagram 视图滑动切换功能类库。API 简单、易用。</big></td>
+</tr>
+<tr>
+<td> <a href="(null">FlipBoardNavigationController</a>)</td>
+<td><big> FlipBoardNavigationController。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/mutualmobile/MMDrawerController" target="_blank" rel="external">MMDrawerController</a></td>
+<td><big> 最多人用的一个有关侧边“抽屉”导航框架，里面还有很多你意想不到的交互效果，侧滑。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/yfme/UIImageView-PlayGIF" target="_blank" rel="external">UIImageView-PlayGIF</a></td>
+<td><big> UIImageView-PlayGIF。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/liyong03/YLGIFImage" target="_blank" rel="external">YLGIFImage</a></td>
+<td><big> YLGIFImage。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/liyong03/YLGIFImage-Swift" target="_blank" rel="external">YLGIFImage-Swift</a></td>
+<td><big> YLGIFImage-Swift。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/schneiderandre/popping" target="_blank" rel="external">popping</a></td>
+<td><big> popping是一个POP 使用实例工程</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/xhzengAIB/SinaMenuView" target="_blank" rel="external">SinaMenuView</a></td>
+<td><big> 用POP动画引擎写的Sina微博的Menu菜单。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/pingguo-zangqilong/ZQLRotateMenu" target="_blank" rel="external">ZQLRotateMenu</a></td>
+<td><big> 这是一个旋转视图的选择器。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/pingguo-zangqilong/CoolLoadAniamtion" target="_blank" rel="external">CoolLoadAniamtion</a></td>
+<td><big> 一个简单但是效果不错的loading动画。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/pingguo-zangqilong/SequenRotateAnimation" target="_blank" rel="external">SequenRotateAnimation</a></td>
+<td><big> 一个简单的loading次序动画。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/441088327/SYAppStart" target="_blank" rel="external">SYAppStart</a></td>
+<td><big> App启动插画的自定义过度。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/michaelbabiy/RMParallax" target="_blank" rel="external">RMParallax</a></td>
+<td><big> RMParallax是一个app启动页引导开源项目，除了细微的翻页视差效果，描述文本的过渡也非常美观（版本新特性）。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/nsdictionary/CoreNewFeatureVC" target="_blank" rel="external">CoreNewFeatureVC</a></td>
+<td><big> 版本新特性（引导页），1.封装并简化了版本新特性启动视图！2.添加了版本的本地缓存功能，3.集成简单，使用方便，没有耦合度，4.支持block回调。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/KittenYang/KYBezierBounceView" target="_blank" rel="external">KYBezierBounceView</a></td>
+<td><big> 手势控制贝塞尔曲线，取消手势贝塞尔曲线会有反弹效果。</big></td>
+</tr>
+<tr>
+<td> <a href="http://kittenyang.com/cadisplaylinkanduibezierpath/" target="_blank" rel="external">cadisplaylinkanduibezierpath</a></td>
+<td><big> CADisplayLink结合UIBezierPath的神奇妙用。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/KittenYang/KYWaterWaveView" target="_blank" rel="external">KYWaterWaveView</a></td>
+<td><big> 一个内置波浪动画的UIView，里面有鱼跳跃水溅起来的效果。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/KittenYang/KYPingTransition" target="_blank" rel="external">KYPingTransition</a></td>
+<td><big> 实现圆圈放大放小的转场动画，可以根据自己的需要使用Paper中的弹性效果，有Material风&#26684;。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/KittenYang/KYNewtonCradleAnimiation" target="_blank" rel="external">KYNewtonCradleAnimiation</a></td>
+<td><big> 牛顿摆动画。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/KittenYang/KYShareMenu" target="_blank" rel="external">KYShareMenu</a></td>
+<td><big> 带弹性动画的分享菜单。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/Yalantis/Context-Menu.iOS" target="_blank" rel="external">Context-Menu.iOS</a></td>
+<td><big> 可以为app的菜单添加漂亮的动画内容，可自定义icon，并可根据自己的喜好设计单元&#26684;和布局。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/LuciusLu/DeformationButton" target="_blank" rel="external">DeformationButton</a></td>
+<td><big> 一个简单的变换形状动画按钮。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/heroims/UnReadBubbleView" target="_blank" rel="external">UnReadBubbleView</a></td>
+<td><big> UnReadBubbleView是一个能够拖拽并拉长的气泡视图。拖拽到一定的长度会消失，可以通过系数设置来控制拖拽的长度。气泡也支持多种属性设置。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/MartinRGB/GiftCard-Implementation" target="_blank" rel="external">GiftCard-Implementation</a></td>
+<td><big> 购买的炫酷动画。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/nicklockwood/iCarousel" target="_blank" rel="external">iCarousel</a></td>
+<td><big> iCarousel是一个类，它继承于UIView。用于简化实现各种类型的旋转木马(分页滚动视图）。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/zangqilong198812/HotGirls" target="_blank" rel="external">HotGirls</a></td>
+<td><big> 卡片动画。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/tispr/tispr-card-stack" target="_blank" rel="external">tispr-card-stack</a></td>
+<td><big> swift 卡片风&#26684;动画切换组件及完整交互示例。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/zangqilong198812/QQPersonalInfoTransition" target="_blank" rel="external">QQPersonalInfoTransition</a></td>
+<td><big> 仿照QQ的转场。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/KittenYang/KYAnimatedPageControl" target="_blank" rel="external">KYAnimatedPageControl</a></td>
+<td><big> 除了滚动视图时PageControl会以动画的形式一起移动，点击目标页还可快速定位。支持两种样式：粘性小球和旋转方块。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/hyperoslo/Presentation" target="_blank" rel="external">Presentation</a></td>
+<td><big> 一个类&#20284;RazzleDazzle的框架。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/Alamofire/Alamofire" target="_blank" rel="external">Alamofire</a></td>
+<td><big> Alamofire是AFNetworking的作者mattt新写的网络请求的swift库。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/socketio/socket.io-client-swift" target="_blank" rel="external">socket.io-client-swift</a></td>
+<td><big> WebSockect 客户端类库。开放的通讯协议，有利于构建强大地跨平台应用。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/nghialv/Transporter" target="_blank" rel="external">Transporter</a></td>
+<td><big> swift， 短小、精悍、易用的多文件（并发或顺序）上传和下载传输库。还支持后台运行、传输进程跟踪、暂停/续传/取消/重试控制等功能。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/kevin0571/STNetTaskQueue" target="_blank" rel="external">STNetTaskQueue</a></td>
+<td><big> STNetTaskQueue Objective-C 可扩展网络请求管理库。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/JustHTTP/Just" target="_blank" rel="external">Just</a></td>
+<td><big> 小而美的 HTTP 类。功能简单、直接、完整且健壮性高– swift。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/nghialv/Future" target="_blank" rel="external">Future</a></td>
+<td><big> 基于微框架设计思想的异步执行及结果响应类，代码即简单又干净– swift。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/mzeeshanid/MZDownloadManager" target="_blank" rel="external">MZDownloadManager</a></td>
+<td><big> 下载管理。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/venmo/DVR" target="_blank" rel="external">DVR</a></td>
+<td><big> 针对网络请求的测试框架，超实用的工具。且支持 iOS, OSX, watchOS 全平台。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/rs/SDWebImage" target="_blank" rel="external">SDWebImage</a></td>
+<td><big> SDWebImage 网络图片获取及缓存处理。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/onevcat/Kingfisher" target="_blank" rel="external">Kingfisher</a></td>
+<td><big> 纯 Swift 实现的类 SDWebImage 库，实现了异步下载和缓存图片。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/kiavashfaisali/KFSwiftImageLoader" target="_blank" rel="external">KFSwiftImageLoader</a></td>
+<td><big> Swift，一个图像缓存加载库。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/robbiehanson/XMPPFramework" target="_blank" rel="external">XMPPFramework</a></td>
+<td><big> XMPPFramework openfire聊天。</big></td>
+</tr>
+<tr>
+<td> <a href="http://www.easemob.com/" target="_blank" rel="external">环信</a></td>
+<td><big> 给开发者更稳定IM云功能。8200万用户考验，好用！（暂无及时语音、视频通话）</big></td>
+</tr>
+<tr>
+<td> <a href="http://www.rongcloud.cn/" target="_blank" rel="external">融云</a></td>
+<td><big> 即时通讯云服务提供商。（暂无及时语音、视频通话）</big></td>
+</tr>
+<tr>
+<td> <a href="http://www.yuntongxun.com/" target="_blank" rel="external">容联云通讯</a></td>
+<td><big> 提供基于互联网通话,视频会议,呼叫中心/IVR,IM等通讯服务。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/xhzengAIB/MessageDisplayKit" target="_blank" rel="external">MessageDisplayKit</a></td>
+<td><big> 仿微信聊天，参考JSQMessagesViewController。（国人写）</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/jessesquires/JSQMessagesViewController" target="_blank" rel="external">JSQMessagesViewController</a></td>
+<td><big> 聊天 。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/HanYaZhou1990/-SunFlower" target="_blank" rel="external">SunFlower</a></td>
+<td><big> 环信聊天demo，比较多功能 。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/crazypoo/SimpleCarrie" target="_blank" rel="external">SimpleCarrie</a></td>
+<td><big> 简单的运营商信息获取!。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/siriusdely/GTMNSString-HTML" target="_blank" rel="external">GTMNSString-HTML</a></td>
+<td><big> 谷歌开源的用于过滤HTML标签。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/refusebt/RFJModel" target="_blank" rel="external">RFJModel</a></td>
+<td><big> RFJModel是一个IOS类库，可以将JSON字典自动装填到OBJC对象。相比JSONModel有一些非常好的特性，使用上也比较简单。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/nicklockwood/XMLDictionary" target="_blank" rel="external">XMLDictionary</a></td>
+<td><big> ios与mac os平台下xml与NSDictionary相互转化开源类库。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/CoderMJLee/MJExtension" target="_blank" rel="external">MJExtension</a></td>
+<td><big> 用于json转model进行使用，转换效率很高，使用也比较简单，只要前后台约定好，json直接就转成了model。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/CoderMJLee/MJExtension" target="_blank" rel="external">CFRuntime</a></td>
+<td><big> “Swift 版的 MJExtension，运行时、反射与一键字典模型互转”。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/exsortis/DateTimeKit" target="_blank" rel="external">DateTimeKit</a></td>
+<td><big> 一个超赞的时间处理的库，Joda-Time ！ 他能帮你轻松处理时区，处理时间加减，计算到期时间等等场景下的问题。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/malcommac/SwiftDate" target="_blank" rel="external">SwiftDate</a></td>
+<td><big> 特别完整、强大的日期时间操作管理类库。它几乎涵盖了已知开源日期类库所有优秀特性。 他能帮你轻松处理时区，处理时间加减，计算到期时间等等场景下的问题。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/nst/iOS-Runtime-Headers" target="_blank" rel="external">iOS私有API</a></td>
+<td><big> 私有API，绿色 == public，红色 == private，蓝色 == dylib。</big></td>
+</tr>
+<tr>
+<td> <a href="http://opensource.apple.com/source/CF/" target="_blank" rel="external">iOS源代码</a></td>
+<td><big> iOS源代码。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/Brimizer/Slidden" target="_blank" rel="external">Slidden</a></td>
+<td><big> 一个老外开源的开发自定义键盘的库，利用这个开源库，可以方便的配置键位、颜色以及键位对应的图片。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/michaeltyson/TPKeyboardAvoiding" target="_blank" rel="external">TPKeyboardAvoiding</a></td>
+<td><big> 用户键盘弹出自动计算高度，进行屏幕滚动操作。</big></td>
+</tr>
+<tr>
+<td> <a href="http://d.cocoachina.com/code/detail/298267" target="_blank" rel="external">CDPMonitorKeyboard</a></td>
+<td><big> CDPMonitorKeyboard封装,可以解决输入视图(例如textField,textView等)被键盘覆盖问题，并可设置高于键盘多少。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/zwaldowski/BlocksKit" target="_blank" rel="external">BlocksKit</a></td>
+<td><big> block框架，为 OC 常用类提供了强大的 Block 语法支持，使得编写 OC 代码变得舒适、快速、优雅。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/arashpayan/appirater" target="_blank" rel="external">appirater</a></td>
+<td><big> 用于提醒用户给你的 APP 打分的工具。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/MHaroonBaig/MotionKitr" target="_blank" rel="external">MotionKitr</a></td>
+<td><big> 为核心运动框架（The Core Motion framework）提供友好的类库封装，以更方便使用三轴陀螺仪和加速感应器特性。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/futurice/ios-good-practices" target="_blank" rel="external">ios-good-practices</a></td>
+<td><big> ios-good-practices iOS 开发最佳实践。</big></td>
+</tr>
+<tr>
+<td> <a href="http://ios.jobbole.com/81830/" target="_blank" rel="external">iOS开发最佳实践</a></td>
+<td><big> iOS 开发最佳实践 — 中文。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/liuchunlao/Password-keyboard" target="_blank" rel="external">Password-keyboard</a></td>
+<td><big> 随机变换数字位置的密码键盘。 模仿银行类应用在付款时输入的随机密码键盘。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/gali8/Tesseract-OCR-iOS" target="_blank" rel="external">Tesseract-OCR-iOS</a></td>
+<td><big> 有关OCR文字识别项目。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/shaojiankui/IOS-Categories" target="_blank" rel="external">iOS-Categories</a></td>
+<td><big> 收集了许多有助于开发的iOS扩展,各种category。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/nonstriater/Olla4iOS" target="_blank" rel="external">Olla4iOS</a></td>
+<td><big> 过去积累的一些方便复用的类和方法，还在整理中。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/Draveness/DKNightVersion" target="_blank" rel="external">DKNightVersion</a></td>
+<td><big> 用最快的方式给你的应用加上夜间和白天的切换效果。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/morizotter/TouchVisualizer" target="_blank" rel="external">TouchVisualizer</a></td>
+<td><big> 实用的多点触摸可视化组件。扩展并作用于 UIWindows，结构上提供了简单地针对触摸显示定制，比如触摸点的颜色。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/wezm/RegexKitLite" target="_blank" rel="external">RegexKitLite</a></td>
+<td><big> 用来处理正则表达式。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/FabrizioBrancati/BFKit-Swift" target="_blank" rel="external">BFKit-Swift</a></td>
+<td><big> BFKit-Swift 这套工具库可以提高应用开发效率。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/CloudKitSpace/CKSIncrementalStore" target="_blank" rel="external">CKSIncrementalStore</a></td>
+<td><big> 基于 CloudKit 服务器实现多终端数据同步。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/oisdk/SwiftSequence" target="_blank" rel="external">SwiftSequence</a></td>
+<td><big> 简洁、灵活、多变的操作 SequenceType 的类库（基于微框架（μframework）设计思想）。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/photondragon/IDNFeedParser" target="_blank" rel="external">IDNFeedParser</a></td>
+<td><big> 一个简单易用的Rss解析库。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/nsdictionary/CoreUmeng" target="_blank" rel="external">CoreUmeng</a></td>
+<td><big> 简单：友盟分享封装。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/100apps/openshare" target="_blank" rel="external">openshare</a></td>
+<td><big> 不用官方SDK，利用社交软件移动客户端(微信/QQ/微博/人人/支付宝)分享/登录/支付。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/tomkowz/Swifternalization" target="_blank" rel="external">Swifternalization</a></td>
+<td><big> 一套实用的本地化工具库。使用教程及 API 文档完整。&#20540;得收入项目的“轮子”。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/owensd/apous" target="_blank" rel="external">apous</a></td>
+<td><big> 一款有趣的 Swift 应用 － 让 Swift 成为脚本语言。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/kostiakoval/Mirror" target="_blank" rel="external">Mirror</a></td>
+<td><big> 通过反射（Refection）实现镜像对象封装库。从而可以更轻松获取（或输出）对象属性名、类型及&#20540;变量。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/nixzhu/Proposer" target="_blank" rel="external">Proposer</a></td>
+<td><big> Proposer 用单个 API 处理 iOS 上的权限请求，以便使用前确认可访问“相册”、“相机”、“麦克风”、“通讯录”或“用户位置”。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/Cee/pangu.objective-c" target="_blank" rel="external">pangu.objective-c</a></td>
+<td><big> 有多种语言实现版本～ Pangu.Objective-C：&#26684;式化中英文之间的空&#26684;（OC）。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/atomicobject/objection" target="_blank" rel="external">objection</a></td>
+<td><big> 一个轻量级的依赖注入框架Objection。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/Gerry1218/GXDatabaseUtils" target="_blank" rel="external">GXDatabaseUtils</a></td>
+<td><big> 在FMDB基础上的工具。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/realm/realm-cocoa" target="_blank" rel="external">realm-cocoa</a></td>
+<td><big> Realm是一个真正为移动设备打造的数据库，同时支持Objective-C和Swfit。Realm宣称其相比Sqlite，在移动设备上有着更好的性能表现。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/andrelind/Breeze" target="_blank" rel="external">Breeze</a></td>
+<td><big> 用Swift写的一个轻量级的CoreData管理工具，并且还支持iCloud 。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/Alecrim/AlecrimCoreData" target="_blank" rel="external">AlecrimCoreData</a></td>
+<td><big> Swift，更容易地访问 CoreData 对象封装类库。除了 CRUD，还提供指针定位，强大的排序、筛选，异步数据获取，以及独立线程后台存取数据。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/tumblr/TMCache" target="_blank" rel="external">TMCache</a></td>
+<td><big> TMCache 是 Tumblr 开源的一个基于 key/value 的数据缓存类库,可以用于缓存一些临时数据或者需要频繁加载的数据,比如某些下载的数据或者一些临时处理结果。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/jl322137/JLKeychain" target="_blank" rel="external">JLKeychain</a></td>
+<td><big> 快捷使用keychain存储数据的类，使keychain像NSUserDefaults一样工作。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/soffes/sskeychain" target="_blank" rel="external">sskeychain</a></td>
+<td><big> SSKeyChains对苹果安全框架API进行了简单封装,支持对存储在钥匙串中密码、账户进行访问,包括读取、删除和设置。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/kishikawakatsumi/KeychainAccess" target="_blank" rel="external">KeychainAccess</a></td>
+<td><big> 管理Keychain接入的小助手。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/vfr/Reader" target="_blank" rel="external">Reader</a></td>
+<td><big> Reader可提供类&#20284;iBooks的文档导航，支持屏幕旋转和所有方向，并通过密码保护加密PDF文件，支持PDF链接和旋转页面。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/liric28/FLAnimatedImage" target="_blank" rel="external">FLAnimatedImage</a></td>
+<td><big> gif播放处理的工具。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/yackle/CLImageEditor" target="_blank" rel="external">CLImageEditor</a></td>
+<td><big> 超强的图片编辑库，快速帮你实现旋转，防缩，滤镜等等一系列麻烦的事情。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/vitoziv/VIPhotoView" target="_blank" rel="external">VIPhotoView</a></td>
+<td><big> 用于展示图片的工具类，因为是个 View，所以你可以放在任何地方显示。支持旋转，双击指定位置放大等。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/BradLarson/GPUImage" target="_blank" rel="external">GPUImage</a></td>
+<td><big> 处理图片效果。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/ruslanskorb/RSKImageCropper" target="_blank" rel="external">RSKImageCropper</a></td>
+<td><big> 适用于iOS的图片裁剪器，类&#20284;Contacts app，可上下左右移动图片选取最合适的区域。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/itouch2/PhotoTweaks" target="_blank" rel="external">PhotoTweaks</a></td>
+<td><big> 这个库挺赞的，正好是对图像操作的。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/tristanhimmelman/ZoomTransition" target="_blank" rel="external">ZoomTransition</a></td>
+<td><big> swift, 通过手势操控图片的放大、缩小、旋转等自由变化效果的组件及示例。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/melvitax/AFImageHelper" target="_blank" rel="external">AFImageHelper</a></td>
+<td><big> swift,一套针对 UIImage 和 UIImageView 的实用扩展库，功能包含填色和渐变、裁剪、缩放以及具有缓存机制的在线图片获取。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/demon1105/PinterestSwift" target="_blank" rel="external">PinterestSwift</a></td>
+<td><big> swift,Pinterest 风&#26684;图片缩放、切换示例。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/KittenYang/KYElegantPhotoGallery" target="_blank" rel="external">KYElegantPhotoGallery</a></td>
+<td><big> 一个优雅的图片浏览库。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/gsdios/SDCycleScrollView" target="_blank" rel="external">SDCycleScrollView</a></td>
+<td><big> 无限循环自动图片轮播器(一步设置即可使用)。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/gsdios/SDPhotoBrowser" target="_blank" rel="external">SDPhotoBrowser</a></td>
+<td><big> 仿新浪动感图片浏览器,非常简单易用的图片浏览器，模仿微博图片浏览器动感效果，综合了图片展示和存储等多项功能。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/FlexMonkey/MarkingMenu" target="_blank" rel="external">MarkingMenu</a></td>
+<td><big> 基于手势、类&#20284; Autodesk Maya 风&#26684;标记菜单及图片渲染。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/rFlex/SCRecorder" target="_blank" rel="external">SCRecorder</a></td>
+<td><big> SCRecorder 短视频录制。</big></td>
+</tr>
+<tr>
+<td> <a href="http://www.videolan.org/" target="_blank" rel="external">VCL</a></td>
+<td><big> VCL官网。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/Bilibili/ijkplayer" target="_blank" rel="external">ijkplayer</a></td>
+<td><big> B站开源的视频播放器，支持Android和iOS。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/tumtumtum/StreamingKit" target="_blank" rel="external">StreamingKit</a></td>
+<td><big> StreamingKit流媒体音乐播放器。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/muhku/FreeStreamer" target="_blank" rel="external">FreeStreamer</a></td>
+<td><big> FreeStreamer流媒体音乐播放器，cpu占用非常小。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/douban/DOUAudioStreamer" target="_blank" rel="external">DOUAudioStreamer</a></td>
+<td><big> DOUAudioStreamer豆瓣的音乐流媒体播放器。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/mmackh/IPDFCameraViewController" target="_blank" rel="external">IPDFCameraViewController</a></td>
+<td><big> 支持相机定焦拍摄、滤镜、闪光、实时边框检测以及透视矫正功能，并有简单易用的API。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/GabrielAlva/Cool-iOS-Camera" target="_blank" rel="external">Cool-iOS-Camera</a></td>
+<td><big> Cool-iOS-Camera。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/IFTTT/FastttCamera" target="_blank" rel="external">FastttCamera</a></td>
+<td><big> FastttCamera 快速照相。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/itsmeichigo/ICGVideoTrimmer" target="_blank" rel="external">ICGVideoTrimmer</a></td>
+<td><big> ICGVideoTrimmer提供提供视频剪切的视图（类&#20284;系统相册中浏览视频时顶部那个条状视图）。左右两个边界选择器还能够自定义。</big></td>
+</tr>
+<tr>
+<td> <a href="http://d.cocoachina.com/code/detail/285717" target="_blank" rel="external">IOS录音和播放功能demo</a></td>
+<td><big> 比较完整的ios录音和播放功能的实现。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/imaginary-cloud/CameraManager" target="_blank" rel="external">CameraManager</a></td>
+<td><big> 相机管理封装类库。看着极好用的样子—-swift。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/msching/MCAudioInputQueue" target="_blank" rel="external">MCAudioInputQueue</a></td>
+<td><big> 简易录音类，基于AudioQueue的。</big></td>
+</tr>
+<tr>
+<td> <a href="http://www.penguin.cz/~utx/amr" target="_blank" rel="external">amr</a></td>
+<td><big> 做即时通讯的音频处理，录音文件是m4a，便于web端的音频播放。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/f33chobits/FSVoiceBubble" target="_blank" rel="external">FSVoiceBubble</a></td>
+<td><big> 一个轻量级播放录音音频的气泡：1.支持短时间的音频播放（支持网络音频）；2.播放时的声波动画；3.自定义包括声波的颜色，气泡的背景等。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/36Kr-Mobile/KRVideoPlayer" target="_blank" rel="external">KRVideoPlayer</a></td>
+<td><big> 类&#20284;Weico的播放器，支持竖屏模式下全屏播放。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/sagiwei/SGPush/tree/master/SGPushDemo" target="_blank" rel="external">SGPushDemo</a></td>
+<td><big> 消息推送客户端</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/mattt/Orbiter" target="_blank" rel="external">Orbiter</a></td>
+<td><big> 消息推送客户端:Push Notification Registration for iOS.</big></td>
+</tr>
+<tr>
+<td> <a href="https://code.google.com/p/javapns/downloads/list" target="_blank" rel="external">javapns源代码</a></td>
+<td><big> 消息推送的java服务端代码，注意：DeviceToken中间不能有空&#26684;。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/stefanhafeneger/PushMeBaby" target="_blank" rel="external">pushMeBaby</a></td>
+<td><big> Mac端消息推送端代码，注意：DeviceToken中间要有空&#26684;。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/Glow-Inc/GLPubSub" target="_blank" rel="external">GLPubSub</a></td>
+<td><big> 一个简短实用的 NSNotificationCenter 的封装。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/lizyyy/Homeoff" target="_blank" rel="external">Homeoff</a></td>
+<td><big> 用swift写了一个模仿Launcher通知中心快捷方式的应用。支持20个应用，并增加了一个返回到桌面来解放Home键的功能。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/jaydee3/JDStatusBarNotification" target="_blank" rel="external">JDStatusBarNotification</a></td>
+<td><big> 在状态栏顶部显示通知。可以自定义颜色字体以及动画。支持进度显示以及显示状态指示器。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/MartinRGB/MTSwift-Learning" target="_blank" rel="external">MTSwift-Learning</a></td>
+<td><big> 通过一些简单项目实战演练开始学习 Swift 。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/shinobicontrols/iOS8-day-by-day" target="_blank" rel="external">iOS8-day-by-day</a></td>
+<td><big> swift。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/Polidea/ios-class-guard" target="_blank" rel="external">ios-class-guard</a></td>
+<td><big> 一个用于混淆iOS的类名、方法名以及变量名的开源库–有人反映编译出来的app运行不了。</big></td>
+</tr>
+<tr>
+<td> <a href="(null">《Protecting iOS Applications》</a>)</td>
+<td><big>绍了如何保护iOS程序的代码安全，防止反汇编分析。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/facebook/fishhook" target="_blank" rel="external">fishhook</a></td>
+<td><big> fishhook是Facebook开源的一个可以hook系统方法的工具。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/Juuman/JMPasswordView" target="_blank" rel="external">JMPasswordView</a></td>
+<td><big> 简单实用的手势密码，效果可自行调控。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/nsdictionary/CoreLock" target="_blank" rel="external">CoreLock</a></td>
+<td><big> 本框架是高仿支付宝，并集成了所有功能，并非一个简单的解锁界面展示。个人制作用时1周多，打造解锁终结者框架。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/crazypoo/LikeAlipayLockCodeView" target="_blank" rel="external">LikeAlipayLockCodeView</a></td>
+<td><big> 高仿支付宝手势解锁（超级版）。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/iosdeveloperpanc/PCGestureUnlock" target="_blank" rel="external">PCGestureUnlock</a></td>
+<td><big> 目前最全面最高仿支付宝的手势解锁，而且提供方法进行参数修改，能解决项目开发中所有手势解锁的开发。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/tapwork/HeapInspector-for-iOS" target="_blank" rel="external">HeapInspector</a></td>
+<td><big> HeapInspector是一个用于检测应用中的内存泄漏的开源调试工具。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/RuiAAPeres/UIViewController-Swizzled" target="_blank" rel="external">UIViewController-Swizzled</a></td>
+<td><big> 把你进入的每一个controller的类名打出来,如果看一些特别复杂的项目的时候直接运行demo就可以知道执行次序了。</big></td>
+</tr>
+<tr>
+<td> <a href="https://code.google.com/p/snoop-it/" target="_blank" rel="external">snoop-it</a></td>
+<td><big> snoop-it比UIViewController-Swizzled好用，代码托管在google上。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/zenangst/Versions" target="_blank" rel="external">Versions</a></td>
+<td><big> 版本比较小工具。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/Coneboy-k/KKLog" target="_blank" rel="external">KKLog</a></td>
+<td><big> 一个日志管理系统。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/kif-framework/KIF" target="_blank" rel="external">KIF</a></td>
+<td><big> 是一个开源的用户界面UI测试框架. 使用 KIF, 并利用 iOS中的辅助功能 API, 你将能够编写模拟用户输入，诸如点击，触摸和文本输入，自动化的UI测试.</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/Quick/Quick" target="_blank" rel="external">Quick</a></td>
+<td><big>(null)</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/KittenYang/KYVoiceCurve" target="_blank" rel="external">KYVoiceCurve</a></td>
+<td><big> 类&#20284;Apple Watch中语音的声音曲线动画。</big></td>
+</tr>
+<tr>
+<td> <a href="http://www.swiftkiller.com/?p=613" target="_blank" rel="external">Apple Watch开发教程资料汇总</a></td>
+<td><big> Apple Watch开发教程资料汇总。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/shu223/watchOS-2-Sampler" target="_blank" rel="external">watchOS-2-Sampler</a></td>
+<td><big> 基于 watchOS 2 若干新特性，写了相应的示例代码供大家学习、参考。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/KhaosT/HMWatch" target="_blank" rel="external">HMWatch</a></td>
+<td><big> HMWatch是个有待完善的watchOS 2.0 HomeKit 应用示例。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/manavgabhawala/CocoaMultipeer" target="_blank" rel="external">CocoaMultipeer</a></td>
+<td><big> CocoaMultipeer这个开源框架支持OS X, iOS和watchOS设备间的点对点通信，解决watchOS和Mac之间通信的方案还是很有用的。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/GetHighstreet/HighstreetWatchApp" target="_blank" rel="external">HighstreetWatchApp</a></td>
+<td><big> 是电商平台Highstreet针对App Watch的一款应用，该demo中加载的是虚拟数据。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/singro/v2ex" target="_blank" rel="external">v2ex</a></td>
+<td><big> v2ex 的客户端，新闻、论坛。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/wikimedia/apps-ios-wikipedia" target="_blank" rel="external">apps-ios-wikipedia</a></td>
+<td><big> apps-ios-wikipedia 客户端。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/jpsim/DeckRocket" target="_blank" rel="external">DeckRocket</a></td>
+<td><big> 在相同 WiFi 网络环境内，通过iPhone 控制并播放 Mac 中的 PDF 文档。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/JayFang1993/ScanBook" target="_blank" rel="external">ScanBook</a></td>
+<td><big> 扫扫图书:可以扫描条形码查询图书，也可以关键字搜索，遇到合乎你口味的书，还可以看看别人的读书笔记，不同角度去体会。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/MengTo/DesignerNewsApp" target="_blank" rel="external">DesignerNewsApp</a></td>
+<td><big> Swift 开发的 DesignerNews 客户端，看着美美的！</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/KittenYang/KYWeibo" target="_blank" rel="external">KYWeibo</a></td>
+<td><big> 调用新浪API自己写的第三方微博客户端。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/li6185377/DouQu_IOS" target="_blank" rel="external">DouQu_IOS</a></td>
+<td><big> 逗趣IOS手机端（一款笑话软件）,拥有完整的功能的手机应用app 。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/itjhDev/itjh" target="_blank" rel="external">IT江湖iOS客户端</a></td>
+<td><big> IT江湖iOS客户端。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/artsy/eidolon" target="_blank" rel="external">Eidolon</a></td>
+<td><big> 艺术品拍卖的投标亭平台，用swift与反应式编程框架 ReactiveCocoa。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/nonstriater/CrazyPuzzle" target="_blank" rel="external">CrazyPuzzle</a></td>
+<td><big> 模仿“看图猜成语”App，功能齐全，配有音效，效果很不错。游戏使用cocoa框架完成，没有使用cocos2d的框架。</big></td>
+</tr>
+<tr>
+<td> <a href="http://www.devtf.cn/?p=562" target="_blank" rel="external">仿iOS猎豹垃圾清理(实现原理&#43;源码)</a></td>
+<td><big> 仿iOS猎豹垃圾清理(实现原理&#43;源码),用到私有API。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/sam408130/DSLolita" target="_blank" rel="external">DSLolita</a></td>
+<td><big> 模仿新浪微博做的一款app，有发送博文，评论，点赞，私聊功能。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/gsdios/GSD_ZHIFUBAO" target="_blank" rel="external">GSD_ZHIFUBAO</a></td>
+<td><big> 支付宝高仿版。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/dasdom/Tomate" target="_blank" rel="external">Tomate</a></td>
+<td><big> 这个圆盘式计时器让你更专注于工作或学习。P.S. App Store 上架收费应用（0.99 欧）。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/joeshang/StoveFireiOSMenu" target="_blank" rel="external">StoveFireiOSMenu</a></td>
+<td><big> 炉火餐饮系统iPad点餐端。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/ZhongTaoTian/WNXHuntForCity" target="_blank" rel="external">WNXHuntForCity</a></td>
+<td><big> iOS高仿城觅项目（开发思路和代码）。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/zyprosoft/ZYChat" target="_blank" rel="external">ZYChat</a></td>
+<td><big> 关于聊天界面的可消息类型扩展，响应绑定设计。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/minxiaoming/NiceAppDemo" target="_blank" rel="external">NiceAppDemo</a></td>
+<td><big> 仿最美应用-每日最美的钢琴律动效果。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/lookingstars/meituan" target="_blank" rel="external">meituan</a></td>
+<td><big> 美团5.7iOS版（高仿），功能包括，团购首页，高德地图搜索附近美食并显示在地图上，上门服务，商家，友盟分享。。</big></td>
+</tr>
+<tr>
+<td> <a href="http://www.jianshu.com/p/38cd35968864" target="_blank" rel="external">自定义转场动画</a></td>
+<td><big> 3 种方法～ 关于自定义转场动画。</big></td>
+</tr>
+<tr>
+<td> <a href="http://jsonapi.org.cn/" target="_blank" rel="external">用 JSON 构建 API 的标准指南</a></td>
+<td><big> 用 JSON 构建 API 的标准指南。</big></td>
+</tr>
+<tr>
+<td> <a href="http://www.cocoachina.com/special/xcode/" target="_blank" rel="external">iOS开发进阶，从Xcode开始</a></td>
+<td><big> 学习使用Xcode构建出色的应用程序！</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/onevcat/VVDocumenter-Xcode" target="_blank" rel="external">VVDocumenter-Xcode</a></td>
+<td><big> 一个Xcode插件，build后，随手打开一个你之前的项目，然后在任意一个方法上面连按三下”/”键盘，就ok了。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/google/j2objc" target="_blank" rel="external">java2Objective-c</a></td>
+<td><big> Google公司出得java转Obje-C转换工具，转换逻辑，不转换UI。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/ksuther/KSImageNamed-Xcode" target="_blank" rel="external">KSImageNamed</a></td>
+<td><big> 自动完成，特别是如果你正在写Objective-C，如果Xcode能自动完成文件名难道不会很伟大吗？比如图像文件的名称。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/johnno1962/GitDiff" target="_blank" rel="external">GitDiff</a></td>
+<td><big> Xcode的代码编辑器的一个微妙的补强，加上了足够的可见信息以了解上次git提交以来发生了什么变化，设置：xcode-》Edit-》GitDiff。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/lucholaf/Auto-Importer-for-Xcode" target="_blank" rel="external">Auto-Importer</a></td>
+<td><big> Auto-Importer是一个自动导入类对应的头文件的Xcode插件。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/omz/ColorSense-for-Xcode" target="_blank" rel="external">ColorSense-for-Xcode</a></td>
+<td><big> 颜色插件，安装之后，就不用根据RGB选择颜色，直接从取色板中取颜色，会自动补齐RGB代码。。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/MakeZL/ZLGotoSandboxPlugin" target="_blank" rel="external">ZLGotoSandboxPlugin</a></td>
+<td><big> 支持Xcode快捷键了跳转当前应用沙盒了！快捷键是 Shift&#43;Common&#43;w。</big></td>
+</tr>
+<tr>
+<td> <a href="https://vimeo.com/128713880" target="_blank" rel="external">CoPilot</a></td>
+<td><big> 通过此插件， Xcode 可以协同编程了（采用 WebSocket 通讯）。如此强大的“黑工具”，不爱它能行吗。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/EnjoySR/ESJsonFormat-Xcode" target="_blank" rel="external">ESJsonFormat-Xcode</a></td>
+<td><big> 将Json&#26684;式化输出为模型的属性。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/stefanceriu/SCXcodeMiniMap" target="_blank" rel="external">SCXcodeMiniMap</a></td>
+<td><big> Xcode迷你小地图-SCXcodeMiniMap。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/markohlebar/Peckham" target="_blank" rel="external">TWG_Retina_Icons</a></td>
+<td><big> 一套支持 Retina 高清屏的 iPhone 免费图标集。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/RayPS/my-sketch-colors" target="_blank" rel="external">my-sketch-colors</a></td>
+<td><big> 配色。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/yannickl/DynamicColor" target="_blank" rel="external">DynamicColor</a></td>
+<td><big> 强大的颜色操作扩展类。通过该类，你可以通过扩展方法基于某个颜色得到不同深浅、饱和度、灰度、色相，以及反转后的新颜色。是不可多得的好类库。</big></td>
+</tr>
+<tr>
+<td> <a href="http://githuber.info/#/index" target="_blank" rel="external">githuber</a></td>
+<td><big> 最好用的GitHub人才搜索工具。</big></td>
+</tr>
+<tr>
+<td> <a href="https://www.codatlas.com/" target="_blank" rel="external">codatlas</a></td>
+<td><big> 源代码搜索利器。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/kitematic/kitematic" target="_blank" rel="external">kitematic</a></td>
+<td><big> Mac 上使用 Docker 最简单的方案。</big></td>
+</tr>
+<tr>
+<td> <a href="http://www.douban.com/note/276160185/?type=like" target="_blank" rel="external">豆瓣iOS开源库列表</a></td>
+<td><big> 豆瓣iOS开源库列表，很多开源项目。</big></td>
+</tr>
+<tr>
+<td> <a href="http://code4app.com/article/cocoapods-install-usage" target="_blank" rel="external">cocoapods安装指南</a></td>
+<td><big> cocoapods安装指南。</big></td>
+</tr>
+<tr>
+<td> <a href="http://objccn.io/issue-13-1/" target="_blank" rel="external">MVVM 介绍</a></td>
+<td><big> 替换MVC的开发模式。</big></td>
+</tr>
+<tr>
+<td> <a href="http://apistore.baidu.com/astore/index" target="_blank" rel="external">第三方接口</a></td>
+<td><big> 基本所有第三方接口都在这，再也不用那么麻烦去找了。</big></td>
+</tr>
+<tr>
+<td> <a href="http://codecloud.net/swift-doc-1271.html" target="_blank" rel="external">&nbsp;Swift语言教程中文文档</a></td>
+<td><big>(null)</big></td>
+</tr>
+<tr>
+<td> <a href="http://www.swifttoolbox.io/" target="_blank" rel="external">swifttoolbox</a></td>
+<td><big> swifttoolbox swift开发的开源库汇总。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/ipader/SwiftGuide" target="_blank" rel="external">SwiftGuide</a></td>
+<td><big> 这份指南汇集了Swift语言主流学习资源，并以开发者的视角整理编排– 非常不错，&#20540;得推荐。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/ipader/SwiftGuide/blob/master/Featured.md" target="_blank" rel="external">Swift开源项目精选</a></td>
+<td><big> Swift开源项目精选–推荐，每周都有更新。</big></td>
+</tr>
+<tr>
+<td> <a href="https://swift.zeef.com/robin.eggenkamp" target="_blank" rel="external">Awesome Swift</a></td>
+<td><big> 一个收集了很多 Swift 开发资源的网站。</big></td>
+</tr>
+<tr>
+<td> <a href="http://www.code4app.com/" target="_blank" rel="external">code4app</a></td>
+<td><big> 最多国人用的代码库。</big></td>
+</tr>
+<tr>
+<td> <a href="http://code.cocoachina.com/" target="_blank" rel="external">cocoachina</a></td>
+<td><big> 国内最热门的iOS社区的代码库。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/cjwirth/awesome-ios-ui" target="_blank" rel="external">awesome-ios-ui</a></td>
+<td><big> 收集了不少 iOS UI/UX 库, 包含了很多酷炫的动画效果。</big></td>
+</tr>
+<tr>
+<td> <a href="http://ios-cosmos.com/" target="_blank" rel="external">ios-cosmos</a></td>
+<td><big> The iOS Cosmos：收录了IOS绝大部分的开源框架和工具。</big></td>
+</tr>
+<tr>
+<td> <a href="http://ios-cosmos.com/" target="_blank" rel="external">Cosmos</a></td>
+<td><big> The iOS Cosmos：收录了IOS绝大部分的开源框架和工具。</big></td>
+</tr>
+<tr>
+<td> <a href="http://cocoacontrols.com/" target="_blank" rel="external">cocoacontrols</a></td>
+<td><big> 收集了很多UI控件效果代码，缺点是需要翻墙，而且代码分类不够好。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/lexrus" target="_blank" rel="external">lexrus</a></td>
+<td><big> lexrus国内出名的iOS开源coder，非常库的label动画、textfield动画。</big></td>
+</tr>
+<tr>
+<td> <a href="https://github.com/dkhamsing/open-source-ios-apps" target="_blank" rel="external">open-source-ios-apps</a></td>
+<td><big> iOS App集合，分：swift与Objective-C–国外人整理。</big></td>
+</tr>
+<tr>
+<td> <a href="http://github.ibireme.com/github/list/ios/" target="_blank" rel="external">Github-iOS备忘</a></td>
+<td><big>整理了比较常用的iOS第三方组件，以及github上的统计。</big></td>
+</tr>
+</tbody>
+</table>
+<h1 id="抓取方法"><a href="#抓取方法" class="headerlink" title="抓取方法"></a><a id="hehe">抓取方法</a></h1><hr>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">- (void)viewDidLoad &#123;</div><div class="line">    [super viewDidLoad];</div><div class="line"></div><div class="line">    NSString *paht = [[NSBundle mainBundle] pathForResource:@&quot;iOSMAC.html&quot; ofType:nil];</div><div class="line">    NSString *str = [NSString stringWithContentsOfFile:paht encoding:NSUTF8StringEncoding error:nil];</div><div class="line">    </div><div class="line">    //NSString *rules = @&quot;http[^\\s]&#123;5,50&#125;\&quot; target=\&quot;[^\\n]&#123;10,100&#125;\&quot;&gt;[^\\n]&#123;&#125;&quot;;</div><div class="line">    NSString *rules = @&quot;&lt;li[\\s]style=\&quot;[^\\n]&#123;10,300&#125;&lt;/li&gt;&quot;;</div><div class="line">    NSMutableArray *contextArr = [NSMutableArray arrayWithArray:[self testWithRules:rules context:str]];</div><div class="line">   // NSLog(@&quot;%@&quot;, contextArr);</div><div class="line">    NSMutableArray *urlArr = [NSMutableArray arrayWithCapacity:0];</div><div class="line">    </div><div class="line">    for (NSString *string in contextArr) &#123;</div><div class="line">        NSString *rulesUrl = @&quot;href=\&quot;[^\\n]&#123;5,60&#125;\&quot;\\starget&quot;;</div><div class="line">        NSString *rulesTitle = @&quot;none\&quot;&gt;[^\\n]&#123;1,&#125;&lt;/a&gt;&quot;;</div><div class="line">        NSString *rulesDetail = @&quot;&lt;/a&gt;[^\\n]&#123;2,100&#125;&lt;/li&gt;&quot;;</div><div class="line"></div><div class="line">        NSString *url = [self getStringFromFrontNumber:6 end:14 string:[[self testWithRules:rulesUrl context:string] firstObject]];</div><div class="line">        NSString *title = [self getStringFromFrontNumber:6 end:10 string:[[self testWithRules:rulesTitle context:string] firstObject]];</div><div class="line">        NSString *detail = [self getStringFromFrontNumber:11 end:16 string:[[self testWithRules:rulesDetail context:string] firstObject]];</div><div class="line"></div><div class="line">        NSString *str = [NSString stringWithFormat:@&quot;[%@](%@) | &lt;big&gt;%@&lt;/big&gt;&quot;, title, url, detail];</div><div class="line">        [urlArr addObject:str];</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    NSLog(@&quot;%ld--%@&quot;, urlArr.count, [urlArr componentsJoinedByString:@&quot;\n&quot;]);</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (NSMutableArray *)testWithRules:(NSString *)rules context:(NSString *)str &#123;</div><div class="line">    NSError *error;</div><div class="line">    NSRegularExpression *regular = [NSRegularExpression regularExpressionWithPattern:rules options:NSRegularExpressionAllowCommentsAndWhitespace error:&amp;error];</div><div class="line">    NSArray *resultArr = [regular matchesInString:str options:NSMatchingReportCompletion range:NSMakeRange(0, str.length)];</div><div class="line">    </div><div class="line">    NSMutableArray *mulArr = [NSMutableArray array];</div><div class="line">    for (NSTextCheckingResult *result in resultArr) &#123;</div><div class="line">        NSRange range = [result range];</div><div class="line">        [mulArr addObject:[str substringWithRange:range]];</div><div class="line">    &#125;</div><div class="line">    return mulArr;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (NSString *)getStringFromFrontNumber:(NSInteger)front end:(NSInteger)end string:(NSString *)str &#123;</div><div class="line">   return  [str substringWithRange:NSMakeRange(front, str.length - end)];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p> 抓取的网页: <a href="http://blog.csdn.net/quanqinyang/article/details/48656979" target="_blank" rel="external">http://blog.csdn.net/quanqinyang/article/details/48656979</a></p>
+<p> 原文链接: <a href="http://blog.csdn.net/zhz459880251/article/details/50212257" target="_blank" rel="external">http://blog.csdn.net/zhz459880251/article/details/50212257</a></p>
+</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="zhzDeveloper.github.io/2015/12/07/结合正则 抓取的iOS 第三方/" data-id="cj3uzbmf70042xzhl44hixe9d" class="article-share-link">分享</a><div class="tags"></div><div class="post-nav"><a href="/2015/12/09/iOS常用的宏(整理)--持续更新/" class="pre">iOS常用的宏(整理)--持续更新</a><a href="/2015/12/07/PHP基础--页面传值,输入验证/" class="next">PHP基础--页面传值,输入验证</a></div></div></div></div><div class="pure-u-1 pure-u-md-1-4"><div id="sidebar"><div class="widget"><form action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank" class="search-form"><input type="search" name="word" maxlength="20" placeholder="Search"/><input type="hidden" name="si" value="zhzDeveloper.github.io"/><input name="tn" type="hidden" value="bds"/><input name="cl" type="hidden" value="3"/><input name="ct" type="hidden" value="2097152"/><input name="s" type="hidden" value="on"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS-分类/">iOS-分类</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios平台/">ios平台</a><span class="category-list-count">67</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios平台-UI控件/">ios平台,UI控件</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios平台-图片处理/">ios平台,图片处理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios平台-开发工具/">ios平台,开发工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/swift/">swift</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/开发工具/">开发工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/正则/">正则</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机技巧/">计算机技巧</a><span class="category-list-count">3</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/数据cache/">数据cache</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/Python 爬虫初探/">Python 爬虫初探</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/12/数组排序sortedArrayUsingComparator/">数组排序sortedArrayUsingComparator</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/13/macOS Sierra 找回消失的 “任何来源”/">macOS Sierra 找回消失的 “任何来源”</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/11/Method Swizzling(转载+补充)/">Method Swizzling(转载+补充)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/10/instancesRespondToSelector与respondsToSelector的区别/">instancesRespondToSelector与respondsToSelector的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/08/生成Description/">生成Description</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/26/忽略编译警告/">忽略编译警告</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/09/iOS-面试题整理/">iOS-面试题整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/07/GCD小结/">GCD小结</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2017 <a href="/." rel="nofollow">zhz blogs.</a> Powered by<a rel="nofollow" target="_blank" href="https://github.com/zhzDeveloper"> zhz.</a><a rel="nofollow" target="_blank" href="http://zhzdeveloper.github.io/"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/zhzDeveloper"> zhz.</a></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>

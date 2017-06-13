@@ -1,0 +1,62 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>nil-Nil-NULL-NSNull区别 | zhz blogs</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/6.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.2/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.2/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">nil-Nil-NULL-NSNull区别</h1><a id="logo" href="/.">zhz blogs</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">nil-Nil-NULL-NSNull区别</h1><div class="post-meta">Jan 7, 2016<span> | </span><span class="category"><a href="/categories/ios平台/">ios平台</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span></div><div class="post-content"><ul>
+<li>nil: 一般赋值给空对象</li>
+<li>Nil: Objective-C类的字面零值</li>
+<li>NULL: 一般赋值给nil之外的其他空值。如SEL等；</li>
+<li><p>NSNull: NSNull只有一个方法：+ (NSNull *) null;<br>　　[NSNull null]用来在NSArray和NSDictionary中加入非nil（表示列表结束）的空值.</p>
+<blockquote>
+<p>当向nil发送消息时，返回NO，不会有异常，程序将继续执行下去；<br>而向NSNull的对象发送消息时会收到异常。</p>
+</blockquote>
+<p>C用0来作为不存在的原始值，而NULL作为指针(这在指针环境中相当于0)。</p>
+<p>Objective-C在C的表达不存在的基础上增加了nil。nil是一个指向不存在的对象指针。虽然它在语义上与NULL不同，但它们在技术上是相等的。</p>
+<p>在框架层面，Foundation定义了NSNull，即一个类方法+null，它返回一个单独的NSNull对象。NSNull与nil以及NULL不同，因为它是一个实际的对象，而不是一个零值。</p>
+<p>另外，在Foundation/NSObjCRuntime.h中，Nil被定义为指向零的类指针。这个nil的鲜为人知的大写的表兄并不常常出现，但它至少值得注意。</p>
+</li>
+</ul>
+<h1 id="Nil"><a href="#Nil" class="headerlink" title="Nil"></a>Nil</h1><p> 定义一个空的类<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Class someClass = Nil;</div><div class="line">Class anotherClass = [NSString class];</div></pre></td></tr></table></figure></p>
+<h1 id="关于-nil-的一些事"><a href="#关于-nil-的一些事" class="headerlink" title="关于 nil 的一些事"></a>关于 nil 的一些事</h1><p> 刚被分配的NSObject的内容被设置为0。也就是说那个对象所有的指向其他对象的指针都从nil开始，所以在init方法中设置self.association = nil之类的表达是没有必要的。</p>
+<p> 也许nil最显著的行为是，它虽然为零，仍然可以有消息发送给它。</p>
+<p> 在其他的语言中，比如C++，这样做会使你的程序崩溃，但在Objective-C中，在nil上调用方法返回一个零值。这大大的简化了表达，因为它避免了在使用nil之前对它的检查：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">if (name != nil &amp;&amp; [name isEqualToString:@&quot;Steve&quot;]) &#123; ... &#125;</div></pre></td></tr></table></figure>
+<p> // …可以被简化为：<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">if ([name isEqualToString:@&quot;steve&quot;]) &#123; ... &#125;</div></pre></td></tr></table></figure></p>
+<p> 了解nil如何在Objective-C中工作可以让你将这个便利变成一个功能，而不是潜伏在你的应用中的bug。要确保避免当nil值不需要的情况，要么通过检查或者提前返回来安静的失败，或者通过增加一个NSParameterAssert来抛出异常。</p>
+<h1 id="NSNull：有作没有"><a href="#NSNull：有作没有" class="headerlink" title="NSNull：有作没有"></a>NSNull：有作没有</h1><p> 集合对象无法包含nil作为其具体值，如NSArray、NSSet和NSDictionary。相应地，nil值用一个特定的对象NSNull来表示。NSNull提供了一个单一实例用于表示对象属性中的的nil值。默认的实现方法中，dictionaryWithValuesForKeys:和setValuesForKeysWithDictionary:自动地将NSNull和nil相互转换，因此您的对象不需要进行NSNull的测试操作。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">NSMutableDictionary *mutableDictionary = [NSMutableDictionary dictionary];</div><div class="line">mutableDictionary[@&quot;someKey&quot;] = [NSNull null]; // Sets value of NSNull singleton for `someKey`</div><div class="line">NSLog(@&quot;Keys: %@&quot;, [mutableDictionary allKeys]); // @[@&quot;someKey&quot;]</div></pre></td></tr></table></figure>
+<p> 总的来说，这里的四个表达没有的值是每个Objective-C程序员都应该知道的：</p>
+<table>
+<thead>
+<tr>
+<th>标志</th>
+<th>值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> NULL</td>
+<td>(void *)0</td>
+<td>C指针的字面零值</td>
+</tr>
+<tr>
+<td> nil</td>
+<td>(id)0</td>
+<td>Objective-C对象的字面零值</td>
+</tr>
+<tr>
+<td> Nil</td>
+<td>(Class)0</td>
+<td>Objective-C类的字面零值</td>
+</tr>
+<tr>
+<td> NSNull</td>
+<td>[NSNull null]</td>
+<td>用来表示零值的单独的对象</td>
+</tr>
+</tbody>
+</table>
+<p> 对比:<br> 在Objective-C里，nil对象被设计来跟NULL空指针关联的。他们的区别就是<code>nil是一个对象</code>，而<code>NULL只是一个值</code>。而且我们对于nil调用方法，不会产生crash或者抛出异常。</p>
+<p> 这个技术被framework通过多种不同的方式使用。最主要的就是我们现在在调用方法之前根本无须去检查这个对象是否是nil。假如我们调了nil对象的一个有返回值的方法，那么我们会得到一个nil返回值。<br> 我们可以通过nil对象让我们的dealloc函数实现看上去更帅一点： </p>
+<ul>
+<li>(void) dealloc<br>{<br>self.caption = nil;<br>self.photographer = nil;<br>[super dealloc];<br>} </li>
+</ul>
+<p> 原文链接: <a href="http://blog.csdn.net/zhz459880251/article/details/50476376" target="_blank" rel="external">http://blog.csdn.net/zhz459880251/article/details/50476376</a></p>
+</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="zhzDeveloper.github.io/2016/01/07/nil-Nil-NULL-NSNull区别/" data-id="cj3uzbmeo002uxzhl1okg6tro" class="article-share-link">分享</a><div class="tags"></div><div class="post-nav"><a href="/2016/01/07/NSString 与 Class 互转/" class="pre">NSString 与 Class 互转</a><a href="/2016/01/07/废弃API取消出现Warning的方法/" class="next">废弃API取消出现Warning的方法</a></div></div></div></div><div class="pure-u-1 pure-u-md-1-4"><div id="sidebar"><div class="widget"><form action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank" class="search-form"><input type="search" name="word" maxlength="20" placeholder="Search"/><input type="hidden" name="si" value="zhzDeveloper.github.io"/><input name="tn" type="hidden" value="bds"/><input name="cl" type="hidden" value="3"/><input name="ct" type="hidden" value="2097152"/><input name="s" type="hidden" value="on"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS-分类/">iOS-分类</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios平台/">ios平台</a><span class="category-list-count">67</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios平台-UI控件/">ios平台,UI控件</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios平台-图片处理/">ios平台,图片处理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ios平台-开发工具/">ios平台,开发工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/swift/">swift</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/开发工具/">开发工具</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/正则/">正则</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机技巧/">计算机技巧</a><span class="category-list-count">3</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/03/02/数据cache/">数据cache</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/02/13/Python 爬虫初探/">Python 爬虫初探</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/12/数组排序sortedArrayUsingComparator/">数组排序sortedArrayUsingComparator</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/13/macOS Sierra 找回消失的 “任何来源”/">macOS Sierra 找回消失的 “任何来源”</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/11/Method Swizzling(转载+补充)/">Method Swizzling(转载+补充)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/10/10/instancesRespondToSelector与respondsToSelector的区别/">instancesRespondToSelector与respondsToSelector的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/08/生成Description/">生成Description</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/26/忽略编译警告/">忽略编译警告</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/09/iOS-面试题整理/">iOS-面试题整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/07/GCD小结/">GCD小结</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2017 <a href="/." rel="nofollow">zhz blogs.</a> Powered by<a rel="nofollow" target="_blank" href="https://github.com/zhzDeveloper"> zhz.</a><a rel="nofollow" target="_blank" href="http://zhzdeveloper.github.io/"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/zhzDeveloper"> zhz.</a></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
